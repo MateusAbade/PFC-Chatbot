@@ -20,14 +20,20 @@ def iniciar():
     global robo
     global treinador
 
-    robo = ChatBot("Robô", storage_adapter='chatterbot.storage.SQLStorageAdapter',
-    database_uri='postgres://postgres:park22@localhost/bot')
+    robo = ChatBot("Robô",
+    storage_adapter='chatterbot.storage.SQLStorageAdapter',
+    logic_adapters = [
+        'chatterbot.logic.TimeLogicAdapter',
+        'chatterbot.logic.BestMatch',
+    ],
+    database_uri='postgresql://postgres:park22@localhost/bot',
+    )
     treinador = ListTrainer(robo)
 
 def carregar_conversas(registro):
     conversas = {
-        "perguntas": [registro["perguntas"]],
-        "respostas": registro["respostas"]
+        "pergunta": [registro["pergunta"]],
+        "resposta": registro["resposta"]
     }
     
 
@@ -37,7 +43,7 @@ def buscar_converas():
     conversas = []
     conexao = get_conexao_bd()
     cursor = conexao.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cursor.execute("select perguntas, respostas from perguntas_respostas")
+    cursor.execute("select pergunta, resposta from perguntas p join resposta r on p.id_resposta=r.id")
     resultado = cursor.fetchall()
     for registro in resultado:
         conversas.append(carregar_conversas(registro))
@@ -46,8 +52,8 @@ def buscar_converas():
 def treinar_robo(conversas):
     global treinador
     for conversa in conversas:
-        perguntas =conversa["perguntas"]
-        resposta =  conversa["respostas"]
+        perguntas =conversa["pergunta"]
+        resposta =  conversa["resposta"]
         print("treinando o robô a responder a: ", perguntas, "com a resposta: ", resposta)
         for pergunta in perguntas:
             treinador.train([pergunta, resposta])

@@ -2,9 +2,10 @@ from chatterbot import ChatBot
 
 
 def executar_robo():
-    robo = ChatBot("Robô", storage_adapter='chatterbot.storage.SQLStorageAdapter',
-     logic_adapters=["chatterbot.logic.BestMatch"],
-     database_uri='postgres://postgres:park22@localhost/bot'
+    robo = ChatBot("Robô", 
+    storage_adapter='chatterbot.storage.SQLStorageAdapter',
+    database_uri='postgresql://postgres:park22@localhost/bot',
+     logic_adapters=["chatterbot.logic.BestMatch"]
     
     )
 
