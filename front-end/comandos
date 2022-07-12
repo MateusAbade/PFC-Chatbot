@@ -1,0 +1,7 @@
+comando para fazer backup do banco postgre
+
+pg_dump -U mateus bot > bot.sqlpsql -U mateus -d chatbot -h localhost -p 5004 -f bot.sql
+
+comando pata restaurar banco postgre
+psql -U mateus -d chatbot -h localhost -p 5004 -f bot.sql
+

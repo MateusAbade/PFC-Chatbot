@@ -1,0 +1,95 @@
+<%- include('cabecalho'); %>
+  <div class="row pagina">
+    <%- include('menuLateral'); %>
+      <div class="col-md-9">
+        <div class="container">
+          <div class="row align-items-center mt-5">
+            <div class="col-sm-6">
+              <div class="row">
+                <h2 class="titulo2 text-center">Vamos treinar o robô?</h2>
+              </div>
+              <div class="row">
+                <p class="texto text-center">
+                  Para treinar o seu robô é muito simples,
+                  basta você clicar no botão "Treinar Robô". Ah!, não se esqueca
+                  de cadastrar as perguntas e respostas antes. Mas Caso quiser
+                  deletar a base de conhecimento do robô é só clicar na lixeira😔
+                </p>
+              </div>
+              <div class="row justify-content-center">
+                <!-- Button trigger modal -->
+                <button type="button" class="btnRobo w-75" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Treinar Robô
+                </button>
+              </div>
+            </div>
+            <div class="col-md-6 ">
+              <img class="w-75" src="./img/treinar.jpg" alt="">
+            </div>
+          </div>
+
+          <div class="row justify-content-end mt-5">
+            <div class="mx-5 col-sm-2">
+              <!-- Button trigger modal -->
+              <button type="button" class="w-75 btnDelete" data-bs-toggle="modal" data-bs-target="#deletetreinamento">
+                <img class="w-100" src="./img/lixeira.png" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="d-md-flex justify-content-center ">
+
+    <div class="col-md-4">
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Treinar Robô</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0"
+                  aria-valuemax="100">25%</div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <form action="/treinar-robo" method="POST">
+                <button type="submit" class="btn btn-primary">Treinar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <!-- Modal -->
+      <div class="modal fade" id="deletetreinamento" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Excluir Base de Conhecimento</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Deseja excluir a base de conhecimento do robô?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <form action="/deletar_treinamento" method="POST">
+                <button type="submit" class="btn btn-primary">Excluir</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('rodape'); %>

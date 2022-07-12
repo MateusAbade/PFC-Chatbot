@@ -1,0 +1,32 @@
+<%- include('cabecalho'); %>
+  <div class="row pagina">
+    <%- include('menuLateral'); %>
+
+      <div class="col-md-9">
+        <div class="container">
+
+          <div class="row">
+            <h2 class="mt-4 titulo2">Cadastro de perguntas e respostas em texto</h2>
+          </div>
+
+          <div class="row mb-3 d-flex justify-content-center">
+            <div class="col-md-8 mt-5">
+              <form method="POST" action="/cadastrar-texto">
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Informe a pergunta</label>
+                  <input type="text" name="perguntas" class="form-control" id="perguntas">
+                </div>
+                <div class="mb-3 mt-3">
+                  <label for="exampleInputEmail1" class="form-label">Informe a resposta</label>
+                  <input type="text" name="resposta" class="form-control" id="resposta" aria-describedby="emailHelp">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Gravar</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </div>
+  <%- include('rodape'); %>

@@ -1,0 +1,6 @@
+chatterbot
+chatterbot-corpus
+Flask-SocketIO
+nltk
+psycopg2-binary
+spacy==2.1.3

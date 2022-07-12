@@ -1,0 +1,55 @@
+<%- include('cabecalho'); %>
+  <div class="row pagina">
+    <%- include('menuLateral'); %>
+
+      <div class="col-md-9">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="row mb-3 d-flex align-items-center">
+                <img class="w-100" src="./img//Wavy_Tech-12_Single-041.jpg" alt="">
+
+              </div>
+            </div>
+
+            <div class="col-sm-5">
+              <div class="row mb-3">
+                <div class="row">
+                  <div class="mt-5 col">
+                    <h2 class="titulo2 text-center">Bem-vindo ao ambiente de desenvolvimento do seu ChatBot</h2>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <p class="texto text-center">Tudo é muito simples e facil, ah!, mas caso surgir alguma duvida, é só
+                      acessar a
+                      area de informações
+                      que fica na barra lateral a esquerda!
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            
+          </div>
+            <div class="row mb-3 d-flex align-items-center">
+              <%- include('chat'); %>
+          </div>
+
+        </div>
+
+        <div id="janelaModal">
+          <div>
+            <button type="button" id="btnFechar" data-bs-dismiss="offcanvas" aria-label="Close"><i
+                class="material-icons icone">close</i></button>
+          </div>
+          <img id="imgModal">
+
+
+        </div>
+      </div>
+    </div>
+      <%- include('rodape'); %>

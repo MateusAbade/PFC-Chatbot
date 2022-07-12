@@ -1,0 +1,45 @@
+<%- include('cabecalho'); %>
+  <div class="row pagina">
+    <%- include('menuLateral'); %>
+
+      <div class="col-md-9">
+        <div class="container">
+
+          <div class="row">
+            <h2 class="mt-4 titulo2">Cadastro de perguntas e respostas com midias</h2>
+          </div>
+
+          <div class="row mb-3 d-flex justify-content-center">
+            <div class="col-md-8 mt-5">
+              <form method="POST" enctype="multipart/form-data" action="/cadastrar-midia">
+                <div id="arquivoLocal" class="mb-3 mt-3">
+                  <label for="exampleFormControlFile1" class="form-label d-block">Selecone a mídia</label>
+                  <input type="file" name="file" class="form-control-file input" id="exampleFormControlFile1">
+                </div>
+                <div id="url" class="text-end">
+                  <label class="form-label d-block">Caso você quiser inserir a url de um arquivo, <a
+                      onclick="arquivoUrl('true')" href="#">clique aqui </a></label>
+                </div>
+                <div id="voltar" class="text-end mt-5">
+                  <label class="form-label d-block"> <a onclick="arquivoUrl('false')" href="#">Voltar </a></label>
+                </div>
+
+                <div id="arquivoUrl" class="mb-3 mt-3">
+                  <label for="exampleInputPassword1" class="form-label">Url</label>
+                  <input type="text" name="url" class="form-control" id="exampleInputPassword1">
+                </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Informe a pergunta</label>
+                  <input type="text" name="perguntas" class="form-control" id="exampleInputPassword1">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Gravar</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </div>
+  <%- include('rodape'); %>

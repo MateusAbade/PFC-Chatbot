@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  backend:
+    image: backend
+    depends_on: 
+      - db
+      - arquivos
+    build: ./dockerfiles/back-end/
+    hostname: backend
+    volumes:
+      - './back-end/chatbot:/usr/src/app'
+    command: python3 servico.py
+    ports:
+      - '5001:5000'
+  frontend:
+    image: frontend
+    depends_on: 
+      - db
+      - arquivos
+    build: ./dockerfiles/front-end/
+    hostname: frontend
+    volumes:
+      - './front-end:/usr/src/app'
+      - './upload:/usr/src/app/upload'
+    command: node servico.js
+    ports:
+      - '5002:3000'
+  arquivos:
+    image: nginx
+    volumes:
+      - './upload:/usr/share/nginx/html'
+    hostname: arquivos
+    ports:
+      - '5003:80'
+  db:
+    image: 'postgres:14.1-alpine'
+    restart: always
+    environment:
+      - POSTGRES_USER=mateus
+      - POSTGRES_PASSWORD=park22
+    ports:
+      - '5004:5432'
+    volumes:
+      - 'db:/var/lib/postgresql/data'
+    hostname: bancodados
+volumes:
+  db:
+    driver: local

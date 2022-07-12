@@ -1,0 +1,47 @@
+<%- include('cabecalho'); %>
+	<div class="row pagina">
+		<%- include('menuLateral'); %>
+
+			<div class="col-md-9">
+				<div class="container">
+
+					<div class="row">
+						<h2 class="titulo2 mt-3 mb-3">informações cadastradas</h2>
+					</div>
+
+					<div class="borda-tabela">
+						<div class="row mb-3">
+							<div class="col-sm-5">
+								<h5>Pergunta</h5>
+							</div>
+							<div class="col-sm-5">
+								<h5>Resposta</h5>
+							</div>
+						</div>
+						<hr />
+						<div class="tabela2">
+
+							<% for(let item of dados){%>
+								<div class="row mb-3" id="resposta_<%= item.id_resposta %>">
+									<div class="col-sm-5 text-break info-cadastradas">
+										<%= item.pergunta %>
+									</div>
+									<div class="col-sm-5 text-break info-cadastradas">
+										<%= item.resposta %>
+									</div>
+									<div class="col-sm-2 mt-2 d-flex justify-content-between">
+										<i class=" text-danger material-icons"
+											onclick="deletarInformacao(<%= item.id_resposta%>)">delete</i>
+										<i class="text-success material-icons"
+											onclick="editarInformacao(<%= item.id_pergunta %>, <%= item.id_resposta %>,'<%= item.pergunta %>', '<%= item.resposta %>')">edit</i>
+									</div>
+								</div>
+								<% } %>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+	</div>
+	<%- include('rodape'); %>
