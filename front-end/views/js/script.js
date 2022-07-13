@@ -53,17 +53,28 @@ function arquivoUrl(valor){
 var btnContainer = document.getElementById("ativo");
 
 // Get all buttons with class="btn" inside the container
-var btns = btnContainer.getElementsByClassName("btn");
+//var btns = btnContainer.getElementsByClassName("btn");
 
 // Loop through the buttons and add the active class to the current/clicked button
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
+// for (var i = 0; i < btns.length; i++) {
+//   btns[i].addEventListener("click", function() {
+//     var current = document.getElementsByClassName("active");
+//     current[0].className = current[0].className.replace(" active", "");
+//     this.className += " active";
+//   });
+// }
+
+function displayCarregar(){
+  document.getElementById('carregar').style.display = "block";
+  
 }
 
 
+  setTimeout(function () {
+		document.getElementById('alertaOk').style.display= "none";
+	}, 3000);
+  setTimeout(function () {
+		document.getElementById('alertaErro').style.display= "none";
+	}, 3000);
 
 

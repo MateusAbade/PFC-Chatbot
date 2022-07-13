@@ -115,7 +115,7 @@ def buscar_conversas():
     conexao = get_conexao_bd()
     cursor = conexao.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cursor.execute(
-        "select pergunta, resposta from perguntas p join resposta r on p.id_resposta=r.id")
+        "select p.id as id_pergunta, r.id as id_resposta, pergunta, resposta from perguntas p join resposta r on p.id_resposta=r.id")
     resultado = cursor.fetchall()
     for registro in resultado:
         conversas.append(carregar_conversas(registro))
