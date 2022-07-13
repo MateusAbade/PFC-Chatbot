@@ -13,10 +13,8 @@ body {
     src: local(Raleway), url(../fonts/AnekLatin-VariableFont_wdth\,wght.ttf);
 }
 
-.fonte {
-
+.logo {
     color: #ffffff !important;
-
 }
 
 .lnavbar {
@@ -31,13 +29,6 @@ body {
 
 li {
     list-style-type: none;
-}
-
-
-.menuLateral {
-    background-color: #287469 !important;
-    position: fixed;
-    height: 100%;
 }
 
 .bLateral {
@@ -267,4 +258,77 @@ a {
 
 #voltar {
     display: none;
+}
+
+button{
+	background-color: #006575;
+	color: #fff;
+}
+button:hover{
+	background-color: #FF500F;
+	color: #fff;
+}
+.menu {
+	background-color: #40aba0 !important;
+	border: 0 !important;	
+}
+
+.btn {
+	font-size: 20px;
+}
+#carregar{
+	display: none;
+}
+.borda-tabela {
+	border:solid 1px #DFDFDF;
+	padding:25px !important;
+}
+
+.alertaTreinamento{
+	position: absolute !important;
+    top: 72%;
+    left: 29%;
+    width: 50%;
+
+}
+.alertaConversas{
+	position: absolute !important;
+	top: 11%;
+    left: 37%;
+    width: 50%;
+}
+
+.active {
+	background-color: #fff !important;
+	border: #fff !important;
+    border-right:solid 10px #006575 !important;
+}
+
+.activeText {
+	color: #006575 !important;
+    font-family: 'AnekLatin', sans-serif;
+    font-size: 20px;
+}
+
+li a:hover {
+	text-decoration: none;
+}
+
+.info-cadastradas {
+
+    font-size: 16px;
+    color: #575757 !important;
+    font-family: 'AnekLatin', sans-serif;
+
+}
+.tabela2{
+	height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.pagina{
+	overflow-y: auto;
+	position: fixed;
+    height: 100%;
+	width: 102%;
 }
