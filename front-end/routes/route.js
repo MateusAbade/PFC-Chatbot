@@ -5,6 +5,18 @@ const path = require('path');
 const conversas = require('../api/index.js');
 
 
+const cyrb53 = function(str, seed = 0) {
+    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+    for (let i = 0, ch; i < str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1>>>16), 2246822507) ^ Math.imul(h2 ^ (h2>>>13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2>>>16), 2246822507) ^ Math.imul(h1 ^ (h1>>>13), 3266489909);
+    return (h2>>>0).toString(16).padStart(8,0)+(h1>>>0).toString(16).padStart(8,0);
+};
+
 let nomeArquivo, extensao;
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -19,17 +31,17 @@ const storage = multer.diskStorage({
             cb(null, '/usr/src/app/upload/outros')
     },
     filename: function (req, file, cb) {
-        nomeArquivo = file.originalname + Date.now() + path.extname(file.originalname);
+        nomeArquivo = cyrb53(file.originalname ) +Date.now()+ path.extname(file.originalname);
         cb(null, nomeArquivo);
     }
+
 });
 
 const upload = multer({ storage })
 
-
 //Rotas das páginas 
 router.get('/', (req, res) => {
-    res.render('index.ejs');
+    res.render('index.ejs', {teste: 'ola'});
 });
 router.get('/cad-texto', (req, res) => {
     res.render('cadTexto.ejs', { alertaCadastro: '' });

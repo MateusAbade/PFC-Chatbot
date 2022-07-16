@@ -20,7 +20,6 @@ function clique(url, tipo){
     offcanvas.style.display="flex";
     btnRobo.style.display="block";
   }
-
 }
 function ocultarBtnChat(){
   var chat = document.getElementById('chat');
@@ -38,43 +37,29 @@ function arquivoUrl(valor){
     document.getElementById('arquivoUrl').style.display="block";
     document.getElementById('voltar').style.display="block";
     document.getElementById('url').style.display="none";
+    document.getElementById('inputUrl').setAttribute('required', '')
+    document.getElementById('inputLocal').removeAttribute('required', '')
   }else{
     document.getElementById('arquivoLocal').style.display="block";
     document.getElementById('arquivoUrl').style.display="none";
     document.getElementById('voltar').style.display="none";
     document.getElementById('url').style.display="block";
+    document.getElementById('inputUrl').removeAttribute('required', '')
+    document.getElementById('inputLocal').setAttribute('required', '')
   }
-    
-
 }
 
-
-// Get the container element
-var btnContainer = document.getElementById("ativo");
-
-// Get all buttons with class="btn" inside the container
-//var btns = btnContainer.getElementsByClassName("btn");
-
-// Loop through the buttons and add the active class to the current/clicked button
-// for (var i = 0; i < btns.length; i++) {
-//   btns[i].addEventListener("click", function() {
-//     var current = document.getElementsByClassName("active");
-//     current[0].className = current[0].className.replace(" active", "");
-//     this.className += " active";
-//   });
-// }
 
 function displayCarregar(){
-  document.getElementById('carregar').style.display = "block";
-  
+  document.getElementById('carregar').style.display = "block";  
 }
 
 
-  setTimeout(function () {
-		document.getElementById('alertaOk').style.display= "none";
-	}, 3000);
-  setTimeout(function () {
-		document.getElementById('alertaErro').style.display= "none";
-	}, 3000);
+setTimeout(function () {
+  document.getElementById('alertaOk').style.display= "none";
+}, 3000);
+setTimeout(function () {
+  document.getElementById('alertaErro').style.display= "none";
+}, 3000);
 
 

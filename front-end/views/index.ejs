@@ -1,55 +1,150 @@
 <%- include('cabecalho'); %>
   <div class="row pagina">
-    <%- include('menuLateral'); %>
+    <div class="col-md-3 menu g-0">
+      <ul class="list-group">
+        <li class="list-group-item menu pt-3 pb-3 ativo"><a class="d-flex align-items-center activoTexto" href="/">
+          <i class="material-icons pe-2">home</i>HOME</a>
+        </li>
+        
+        <li class="tLateral list-group-item menu pt-3 pb-3 d-flex align-items-center">
+          <i class="material-icons pe-2">computer</i>CADASTROS
+        </li>
+        
+        <li class="list-group-item menu pt-3 pb-3 ps-5">
+          <a class="tLateral d-flex align-items-center" href="/cad-texto">
+            <i class="material-icons pe-2">subject</i>Mensagens de Texto</a>
+        </li>
+        
+        <li class="list-group-item menu pt-3 pb-3 ps-5">
+          <a class="tLateral d-flex align-items-center" href="/cad-midia">
+            <i class="material-icons pe-2">perm_media</i> Mensagens de Midias</a>
+        </li>
 
-      <div class="col-md-9">
-        <div class="container">
+        <li class="list-group-item menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center" href="/conversas-cadastradas">
+            <i class="material-icons pe-2">info</i>INFORMAÇÕES CADASTRADAS</a>
+        </li>
+        
+        <li class="list-group-item menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center" href="/treinar-robo"><i
+              class="material-icons pe-2">smart_toy</i>TREINAR ROBÔ</a>
+        </li>
+      </ul>
+    </div>
 
-          <div class="row">
-            <div class="col-sm-7">
-              <div class="row mb-3 d-flex align-items-center">
-                <img class="w-100" src="./img//Wavy_Tech-12_Single-041.jpg" alt="">
-
-              </div>
-            </div>
-
-            <div class="col-sm-5">
-              <div class="row mb-3">
-                <div class="row">
-                  <div class="mt-5 col">
-                    <h2 class="titulo2 text-center">Bem-vindo ao ambiente de desenvolvimento do seu ChatBot</h2>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <p class="texto text-center">Tudo é muito simples e facil, ah!, mas caso surgir alguma duvida, é só
-                      acessar a
-                      area de informações
-                      que fica na barra lateral a esquerda!
-                    </p>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            
-          </div>
+    <div class="col-md-9">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7">
             <div class="row mb-3 d-flex align-items-center">
-              <%- include('chat'); %>
+              <img class="w-100" src="./img//Wavy_Tech-12_Single-041.jpg" alt="">
+            </div>
           </div>
-
+          <div class="col-sm-5">
+            <div class="row mb-3">
+              <div class="row">
+                <div class="mt-5 col">
+                  <h2 class="titulo2 text-center">Bem-vindo ao ambiente de desenvolvimento do seu ChatBot</h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p class="texto text-center">Tudo é muito simples e facil, ah!, mas caso surgir alguma duvida, é só
+                    acessar a
+                    area de informações
+                    que fica na barra lateral a esquerda!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div id="janelaModal">
-          <div>
-            <button type="button" id="btnFechar" data-bs-dismiss="offcanvas" aria-label="Close"><i
-                class="material-icons icone">close</i></button>
-          </div>
-          <img id="imgModal">
-
-
+        <div class="row mb-3 d-flex align-items-center">
+          <%- include('chat'); %>
         </div>
       </div>
+      <div id="janelaModal">
+        <div>
+          <button type="button" id="btnFechar" data-bs-dismiss="offcanvas" aria-label="Close"><i
+              class="material-icons icone">close</i></button>
+        </div>
+        <img id="imgModal">
+      </div>
     </div>
-      <%- include('rodape'); %>
+  </div>
+
+  <!-- Socket para envio e recebimento das mensagens do robô -->
+  <script>
+    host = '<%= process.env.APP_HOST%>';
+    nginx = host + ':<%= process.env.NGINX_PORT%>';
+    chatbot = host + ':<%= process.env.BACKEND_PORT%>';
+
+    getMidia = function (url) {
+      return nginx + url;
+    }
+
+    window.onload = function () {
+      const socket = io(chatbot);
+      socket.on('connect', () => {
+        socket.send('Usuário conectado ao socket!')
+      });
+
+      document.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (event.target[1].value) {
+          socket.emit('sendMessage', event.target[1].value);
+          const user = document.createElement('user')
+          const chatUser = document.querySelector('.chatBot');
+          user.innerHTML =
+           `<div class=" d-flex flex-row-reverse bd-highlight">
+              <div class="botInput p-2 mb-3 text-end bd-highlight">
+                <span id="user" class="text-break">${event.target[1].value}</span>
+              </div>
+            </div>`
+          chatUser.append(user);
+          event.target[1].value = "";
+        }
+      })
+
+      socket.on('getMessage', (msg) => {
+        const bot = document.createElement('bot');
+        const chatBot = document.querySelector('.chatBot');
+        let tipoMensagem, mensagem;
+        mensagem = msg.slice(1, -1);
+        console.log(getMidia(mensagem));
+        if ((msg.charAt(0) === '<') && (msg.charAt(msg.length - 1) === '>')) {
+          tipoMensagem = `<img onclick="clique('${getMidia(`/img/` + mensagem)}', 'img')" id="miniatura" src="${getMidia(`/img/` + mensagem)}"  alt="">`;
+
+        } else if ((msg.charAt(0) === '%') && (msg.charAt(msg.length - 1) === '%')) {
+          tipoMensagem = 
+           `<video width="320" height="240" controls>
+              <source src="${getMidia(`/video/` + mensagem)}" type="video/mp4">
+              <source src="${getMidia(`/video/` + mensagem)}" type="video/ogg">
+            </video>`;
+
+        } else if ((msg.charAt(0) === '$') && (msg.charAt(msg.length - 1) === '$')) {
+          tipoMensagem = `<span>Para saber mais </span><a class="link" href="${getMidia(`/pdf/` + mensagem)}" target="_blank">Clique aqui</a>`;
+
+        } else if ((msg.charAt(0) === '?') && (msg.charAt(msg.length - 1) === '?')) {
+          tipoMensagem = `<span>Para saber mais </span><a class="link" href="${getMidia(`/outros/` + mensagem)}" target="_blank">Clique aqui</a>`;
+
+        } else if ((msg.charAt(0) === '!') && (msg.charAt(msg.length - 1) === '!')) {
+          tipoMensagem = `<span>Acesse o link: </span><a class="link" href="${mensagem}" target="_blank">${mensagem}</a>`;
+
+        } else {
+          tipoMensagem = msg;
+        }
+        bot.innerHTML =
+          `<div class=" align-self-end">
+             <div class="d-flex flex-row bd-highlight justify-content-start">
+               <img class="imgRobo" src="./img/robo2.png"  alt="">
+               <div class="botOutinput p-2  mb-3 bd-highlight">
+                <span id="bot" class="text-break">${tipoMensagem}</span>
+               </div>
+             </div>
+          </div>`;
+        chatBot.append(bot);
+      })
+    }
+  </script>
+  <%- include('rodape'); %>

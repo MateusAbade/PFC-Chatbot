@@ -1,62 +1,93 @@
 <%- include('cabecalho'); %>
   <div class="row pagina">
-    <%- include('menuLateral'); %>
+    <div class="col-md-3 menu g-0">
+      <ul class="list-group">
+        <li class="list-group-item menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center" href="/">
+            <i class="material-icons pe-2">home</i>HOME
+          </a>
+        </li>
 
-      <div class="col-md-9">
-        <div class="container">
+        <li class="tLateral list-group-item menu pt-3 pb-3 d-flex align-items-center">
+          <i class="material-icons pe-2">computer</i>CADASTROS
+        </li>
 
-          <div class="row">
-            <h2 class="mt-4 titulo2">Cadastro de perguntas e respostas com midias</h2>
-          </div>
+        <li class="list-group-item menu pt-3 pb-3 ps-5">
+          <a class="tLateral d-flex align-items-center" href="/cad-texto">
+            <i class="material-icons pe-2">subject</i>Mensagens de Texto
+          </a>
+        </li>
 
-          <div class="row mb-3 d-flex justify-content-center">
-            <div class="col-md-8 mt-5">
-              <form method="POST" enctype="multipart/form-data" action="/cadastrar-midia">
-                <div id="arquivoLocal" class="mb-3 mt-3">
-                  <label for="exampleFormControlFile1" class="form-label d-block">Selecone a mídia</label>
-                  <input type="file" name="file" class="form-control-file input" id="exampleFormControlFile1">
-                </div>
-                <div id="url" class="text-end">
-                  <label class="form-label d-block">Caso você quiser inserir a url de um arquivo, <a
-                      onclick="arquivoUrl('true')" href="#">clique aqui </a></label>
-                </div>
-                <div id="voltar" class="text-end mt-5">
-                  <label class="form-label d-block"> <a onclick="arquivoUrl('false')" href="#">Voltar </a></label>
-                </div>
+        <li class="list-group-item ativo menu pt-3 pb-3 ps-5">
+          <a class="tLateral d-flex align-items-center activoTexto" href="/cad-midia">
+            <i class="material-icons pe-2">perm_media</i> Mensagens de Midias
+          </a>
+        </li>
+    
+        <li class="list-group-item menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center" href="/conversas-cadastradas">
+            <i class="material-icons pe-2">info</i>INFORMAÇÕES CADASTRADAS
+          </a>
+        </li>
 
-                <div id="arquivoUrl" class="mb-3 mt-3">
-                  <label for="exampleInputPassword1" class="form-label">Url</label>
-                  <input type="text" name="url" class="form-control" id="exampleInputPassword1">
-                </div>
+        <li class="list-group-item menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center" href="/treinar-robo"><i
+              class="material-icons pe-2">smart_toy</i>TREINAR ROBÔ
+          </a>
+        </li>
+      </ul>
+    </div>
 
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Informe a pergunta</label>
-                  <input type="text" name="perguntas" class="form-control" id="exampleInputPassword1">
-                </div>
+    <div class="col-md-9">
+      <div class="container">
+        <div class="row">
+          <h2 class="mt-4 titulo2">Cadastro de perguntas e respostas com midias</h2>
+        </div>
 
-                <button type="submit" class="btn btn-primary">Gravar</button>
-              </form>
-            </div>
+        <div class="row mb-3 d-flex justify-content-center">
+          <div class="col-md-8 mt-5">
+            <form method="POST" enctype="multipart/form-data" action="/cadastrar-midia">
+              <div id="arquivoLocal" class="mb-3 mt-3">
+                <label for="exampleFormControlFile1" class="form-label d-block">Selecone a mídia</label>
+                <input type="file" name="file" class="form-control-file input" id="inputLocal" required>
+              </div>
 
+              <div id="url" class="text-end">
+                <label class="form-label d-block">Caso você quiser inserir a url de um arquivo, 
+                  <a onclick="arquivoUrl('true')" href="#">clique aqui </a>
+                </label>
+              </div>
+
+              <div id="voltar" class="text-end mt-5">
+                <label class="form-label d-block"> <a onclick="arquivoUrl('false')" href="#">Voltar </a></label>
+              </div>
+
+              <div id="arquivoUrl" class="mb-3 mt-3">
+                <label for="exampleInputPassword1" class="form-label">Url</label>
+                <input type="text" name="url" class="form-control" id="inputUrl" >
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Informe a pergunta</label>
+                <input type="text" name="perguntas" class="form-control" id="exampleInputPassword1" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Gravar</button>
+            </form>
           </div>
         </div>
       </div>
+    </div>
   </div>
 
   <% if(alertaCadastro == 'ok'){%>
-    <div class=" alert alert-success alert-dismissible fade show alertaTreinamento" id="alertaOk"
-      role="alert">
+    <div class=" alert alert-success alert-dismissible fade show alertaTreinamento" id="alertaOk" role="alert">
       Operação realizada com sucesso!
-      <button type="button" class="btn-close" data-bs-dismiss="alert"
-        aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% }else if(alertaCadastro == 'erro'){%>
-    <div class=" alert alert-danger alert-dismissible fade show alertaTreinamento" id="alertaErro"
-      role="alert">
+    <div class=" alert alert-danger alert-dismissible fade show alertaTreinamento" id="alertaErro" role="alert">
       Ocorreu um erro, tente novamente mais tarde!
-      <button type="button" class="btn-close" data-bs-dismiss="alert"
-        aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-
   <% }%>
-  <%- include('rodape'); %>
+<%- include('rodape'); %>

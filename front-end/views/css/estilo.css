@@ -1,4 +1,4 @@
-
+/* Globais */
 body {
     font-family: 'Archivo Narrow', sans-serif;
 }
@@ -12,205 +12,11 @@ body {
     font-family: "AnekLatin";
     src: local(Raleway), url(../fonts/AnekLatin-VariableFont_wdth\,wght.ttf);
 }
-
-.logo {
-    color: #ffffff !important;
-}
-
-.lnavbar {
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
-}
-
-.icone {
-    color: #fff !important;
-    padding: 18px;
-}
-
-li {
-    list-style-type: none;
-}
-
-.bLateral {
-    padding: 20px 0px 20px 0px;
-
-}
-
-.tLateral {
-    color: #ffffff !important;
-    font-family: 'AnekLatin', sans-serif;
-    font-size: 17px;
-}
-
-.bLateral:hover {
-    background-color: #40ccb7;
-}
-
-.btnHover:hover {
-    -moz-transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-
-}
-
-.btnMenu:focus {
-    box-shadow: none !important;
-}
-
 a {
     text-decoration: none !important;
-
 }
 
-.nav-color {
-    background-color: #28968b;
-}
-
-.tPainel {
-    font-size: 24px;
-    color: #ffffff !important;
-    padding: 1.5% 70% 1.5% 2%;
-    border-bottom: 2px solid #8caaa6;
-    font-family: 'AnekLatin', sans-serif;
-    font-weight: 800;
-}
-
-.tLink{
-    color: #ffffff !important;
-    font-family: 'AnekLatin', sans-serif;
-    font-size: 20px;
-    border-bottom: 1px solid;
-    width: 85%;
-    padding-top: 6%;
-}
-.marginBLateral{
-    margin-left: 15%;
-}
-.divTitulo {
-    margin-top: 3% !important;
-}
-
-.titulo {
-    font-size: 2rem;
-    color: #575757 !important;
-    font-family: 'AnekLatin', sans-serif;
-}
-
-.titulo2 {
-
-    font-size: 26px;
-    color: #575757 !important;
-    font-family: 'AnekLatin', sans-serif;
-    margin-left: 4%;
-}
-
-.tPrincipal {
-    font-family: 'Robotica', sans-serif;
-    font-size: 24px !important;
-}
-
-.texto {
-    color: #575757 !important;
-    font-size: 17px;
-    padding-top: 5%;
-    text-align: justify;
-    margin-left: 4%;
-}
-
-.iconLateral {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.bot {
-    height: 86vh !important;
-    width: 500px;
-    background-image: linear-gradient(#A67FF6, #A67FF6);
-    left: auto !important;
-    box-shadow: 0px 2px 5px rgb(50 50 50 / 86%)
-}
-
-.btnRobo {
-    padding: 20px 40px;
-    background-image: linear-gradient(#A77FF9, #7560E3);
-    border: 0;
-    color: #fff;
-    font-family: 'AnekLatin', sans-serif;
-    font-size: 22px;
-}
-
-.btnRobo:hover {
-    background-image: linear-gradient(#FEC343, #FBB148);
-    color: rgb(61, 61, 61);
-}
-
-.botCaixa {
-    background-color: #ffffff;
-    --bs-gutter-x: 0 !important;
-}
-
-.botOutinput {
-
-    background-color: #fff;
-    border: solid 1px #d4d4d4;
-    border-radius: 0px 10px 10px 10px;
-}
-
-.botInput {
-
-    background-color: #b4f8ce;
-    border: solid 1px #d4d4d4;
-    border-radius: 10px 0px 10px 10px;
-}
-
-.send {
-    border-radius: 5px 5px 5px 5px !important;
-}
-
-.btnBot {
-    background-color: transparent;
-    border: 1px solid transparent;
-}
-
-.tituloBot {
-    color: #fff;
-    font-weight: bold;
-}
-
-.imgRobo {
-    width: 45px;
-    height: 58px;
-}
-
-.btnDelete {
-    border: 0;
-    background-color: #ffffff00;
-}
-
-.btnDelete:hover {
-    -moz-transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-}
-
-.link {
-    text-decoration: underline !important;
-}
-
-.btnEnviar {
-    background-color: #ffffff00;
-    border: 0;
-}
-
-.btnEnviar:hover {
-    -moz-transform: scale(1.5);
-    -webkit-transform: scale(1.5);
-    transform: scale(1.6);
-}
-.tabela{
-    height: 500px;
-    overflow-y: auto;
-}
+/* Ids */
 #janelaModal {
     display: none;
     position: fixed;
@@ -260,28 +66,93 @@ a {
     display: none;
 }
 
-button{
-	background-color: #006575;
-	color: #fff;
-}
-button:hover{
-	background-color: #FF500F;
-	color: #fff;
-}
-.menu {
-	background-color: #40aba0 !important;
-	border: 0 !important;	
-}
-
-.btn {
-	font-size: 20px;
-}
 #carregar{
 	display: none;
 }
-.borda-tabela {
-	border:solid 1px #DFDFDF;
-	padding:25px !important;
+
+
+/* Classes */
+.pagina{
+	overflow-y: auto;
+	position: fixed;
+    height: 100%;
+	width: 102%;
+}
+.lnavbar {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+.bLateral {
+    padding: 20px 0px 20px 0px;
+
+}
+
+.titulo {
+    font-size: 2rem;
+    color: #575757 !important;
+    font-family: 'AnekLatin', sans-serif;
+}
+
+.titulo2 {
+
+    font-size: 26px;
+    color: #575757 !important;
+    font-family: 'AnekLatin', sans-serif;
+    margin-left: 4%;
+}
+
+.tPrincipal {
+    font-family: 'Robotica', sans-serif;
+    font-size: 24px !important;
+}
+
+.texto {
+    color: #575757 !important;
+    font-size: 17px;
+    padding-top: 5%;
+    text-align: justify;
+    margin-left: 4%;
+}
+
+
+.send {
+    border-radius: 5px 5px 5px 5px !important;
+}
+
+.imgRobo {
+    width: 45px;
+    height: 58px;
+}
+
+.btnDelete {
+    border: 0;
+    background-color: #ffffff00;
+}
+
+.btnDelete:hover {
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.link {
+    text-decoration: underline !important;
+}
+
+.tabela{
+    height: 500px;
+    overflow-y: auto;
+}
+
+.tabela2{
+	height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.btnBot {
+    background-color: transparent;
+    border: 1px solid transparent;
 }
 
 .alertaTreinamento{
@@ -298,21 +169,121 @@ button:hover{
     width: 50%;
 }
 
-.active {
+.logo {
+    color: #ffffff !important;
+    text-align: center;
+}
+
+.icone {
+    color: #fff !important;
+    padding: 18px;
+}
+
+.tLateral {
+    color: #ffffff !important;
+    font-family: 'AnekLatin', sans-serif;
+    font-size: 17px;
+}
+
+.bLateral:hover {
+    background-color: #40ccb7;
+}
+
+.btnHover:hover {
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+
+}
+.btnMenu:focus {
+    box-shadow: none !important;
+}
+
+.nav-color {
+    background-color: #28968b;
+}
+
+.bot {
+    height: 86vh !important;
+    width: 500px;
+    background-image: linear-gradient(#A67FF6, #A67FF6);
+    left: auto !important;
+    box-shadow: 0px 2px 5px rgb(50 50 50 / 86%)
+}
+
+.btnRobo {
+    padding: 20px 40px;
+    background-image: linear-gradient(#A77FF9, #7560E3);
+    border: 0;
+    color: #fff;
+    font-family: 'AnekLatin', sans-serif;
+    font-size: 22px;
+}
+
+.btnRobo:hover {
+    background-image: linear-gradient(#FEC343, #FBB148);
+    color: rgb(61, 61, 61);
+}
+
+.botCaixa {
+    background-color: #ffffff;
+    --bs-gutter-x: 0 !important;
+}
+
+.botOutinput {
+
+    background-color: #fff;
+    border: solid 1px #d4d4d4;
+    border-radius: 0px 10px 10px 10px;
+}
+
+.botInput {
+
+    background-color: #b4f8ce;
+    border: solid 1px #d4d4d4;
+    border-radius: 10px 0px 10px 10px;
+}
+
+.tituloBot {
+    color: #fff;
+    font-weight: bold;
+}
+
+.btnEnviar {
+    background-color: #ffffff00;
+    border: 0;
+}
+
+.btnEnviar:hover {
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.6);
+}
+
+.menu {
+	background-color: #40aba0 !important;
+	border: 0 !important;	
+}
+
+
+.borda-tabela {
+	border:solid 1px #DFDFDF;
+	padding:25px !important;
+}
+
+.ativo {
 	background-color: #fff !important;
 	border: #fff !important;
     border-right:solid 10px #006575 !important;
+    
 }
 
-.activeText {
+.activoTexto {
 	color: #006575 !important;
     font-family: 'AnekLatin', sans-serif;
     font-size: 20px;
 }
 
-li a:hover {
-	text-decoration: none;
-}
 
 .info-cadastradas {
 
@@ -321,14 +292,15 @@ li a:hover {
     font-family: 'AnekLatin', sans-serif;
 
 }
-.tabela2{
-	height: 400px;
-	overflow-y: auto;
-	overflow-x: hidden;
+.btnExcluirTreinamento{
+    width: 100%;
 }
-.pagina{
-	overflow-y: auto;
-	position: fixed;
-    height: 100%;
-	width: 102%;
+@media (max-width: 768px) { 
+    .pagina{
+        height: 80%;
+    }
+    .btnExcluirTreinamento{
+        width: 60px;
+    }
+
 }

@@ -1,64 +1,86 @@
 <%- include('cabecalho'); %>
-	<div class="row pagina">
-		<%- include('menuLateral'); %>
+<div class="row pagina">
+  <div class="col-md-3 menu g-0">
+    <ul class="list-group">
+	  <li class="list-group-item menu pt-3 pb-3">
+	    <a class="tLateral d-flex align-items-center" href="/">
+		  <i class="material-icons pe-2">home</i>HOME
+		</a>
+	  </li>
 
-			<div class="col-md-9">
-				<div class="container">
+	  <li class="tLateral list-group-item menu pt-3 pb-3 d-flex align-items-center">
+	    <i class="material-icons pe-2">computer</i>CADASTROS
+	  </li>
 
-					<div class="row">
-						<h2 class="titulo2 mt-3 mb-3">informações cadastradas</h2>
-					</div>
+	  <li class="list-group-item menu pt-3 pb-3 ps-5">
+	    <a class="tLateral d-flex align-items-center" href="/cad-texto">
+		  <i class="material-icons pe-2">subject</i>Mensagens de Texto
+		</a>
+	  </li>
 
-					<div class="borda-tabela">
-						<div class="row mb-3">
-							<div class="col-sm-5">
-								<h5>Pergunta</h5>
-							</div>
-							<div class="col-sm-5">
-								<h5>Resposta</h5>
-							</div>
-						</div>
-						<hr />
-						<div class="tabela2">
-							<% if(alertaDelete== 'ok'){%>
-								<div class="alert alert-success alert-dismissible fade show alertaConversas" id="alertaOk"
-									role="alert">
-									Operação realizada com sucesso!
-									<button type="button" class="btn-close" data-bs-dismiss="alert"
-										aria-label="Close"></button>
-								</div>
-							<% }else if(alertaDelete == 'erro'){%>
-								<div class="alert alert-danger alert-dismissible fade show alertaConversas" id="alertaErro"
-									role="alert">
-									Ocorreu um erro, tente novamente mais tarde!
-									<button type="button" class="btn-close" data-bs-dismiss="alert"
-										aria-label="Close"></button>
-								</div>
+	  <li class="list-group-item menu pt-3 pb-3 ps-5">
+	    <a class="tLateral d-flex align-items-center" href="/cad-midia">
+		  <i class="material-icons pe-2">perm_media</i> Mensagens de Midias
+		</a>
+	  </li>
+	  
+	  <li class="list-group-item ativo menu pt-3 pb-3">
+	    <a class="tLateral d-flex align-items-center activoTexto" href="/conversas-cadastradas">
+		  <i class="material-icons pe-2">info</i>INFORMAÇÕES CADASTRADAS
+	    </a>
+	  </li>
 
-							<% }%>
-
-									<% for(let item of dados){%>
-										<div class="row mb-3" id="resposta_<%= item.id_resposta %>">
-											<div class="col-sm-5 text-break info-cadastradas">
-												<%= item.pergunta %>
-											</div>
-											<div class="col-sm-5 text-break info-cadastradas">
-												<%= item.resposta %>
-											</div>
-											<div class="col-sm-2 mt-2 d-flex justify-content-between">
-												<i class=" text-danger material-icons"
-													onclick="deletarInformacao(<%= item.id_resposta%>)">delete</i>
-												<i class="text-success material-icons"
-													onclick="editarInformacao(<%= item.id_pergunta %>, <%= item.id_resposta %>,'<%= item.pergunta %>', '<%= item.resposta %>')">edit</i>
-											</div>
-										</div>
-										<% } %>
-
-						</div>
-
-					</div>
-
-				</div>
+	  <li class="list-group-item menu pt-3 pb-3">
+	    <a class="tLateral d-flex align-items-center" href="/treinar-robo">
+		  <i class="material-icons pe-2">smart_toy</i>TREINAR ROBÔ</a>
+	  </li>
+	</ul>
+  </div>
+  <div class="col-md-9">
+    <div class="container">
+	  <div class="row">
+	    <h2 class="titulo2 mt-3 mb-3">informações cadastradas</h2>
+	  </div>
+	  <div class="borda-tabela">
+		<div class="row mb-3">
+		  <div class="col-sm-5">
+			<h5>Pergunta</h5>
+		  </div>
+		  <div class="col-sm-5">
+		    <h5>Resposta</h5>
+		  </div>
+	    </div>
+		<hr/>
+		<div class="tabela2">
+		  <% if(alertaDelete=='ok' ){%>
+		    <div class="alert alert-success alert-dismissible fade show alertaConversas" id="alertaOk" role="alert">
+			  Operação realizada com sucesso!
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
+		  <% }else if(alertaDelete=='erro' ){%>
+		    <div class="alert alert-danger alert-dismissible fade show alertaConversas" id="alertaErro" role="alert">
+			  Ocorreu um erro, tente novamente mais tarde!
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		  <% }%>
+
+		  <% for(let item of dados){%>
+		    <div class="row mb-3" id="resposta_<%= item.id_resposta %>">
+		      <div class="col-sm-5 text-break info-cadastradas">
+			    <%= item.pergunta %>
+			</div>
+			<div class="col-sm-5 text-break info-cadastradas">
+		      <%= item.resposta %>
+			</div>
+			<div class="col-sm-2 mt-2 d-flex justify-content-between">
+		      <i class=" text-danger material-icons" onclick="deletarInformacao(<%= item.id_resposta%>)">delete</i>
+			  <i class="text-success material-icons" onclick="editarInformacao(<%= item.id_pergunta %>, <%= item.id_resposta %>,'<%= item.pergunta %>', '<%= item.resposta %>')">edit</i>
+			</div>
+	      </div>
+		  <% } %>
+	    </div>
+	  </div>
 	</div>
-	<%- include('rodape'); %>
+  </div>
+</div>
+<%- include('rodape'); %>

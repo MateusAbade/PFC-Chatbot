@@ -1,50 +1,84 @@
 <%- include('cabecalho'); %>
   <div class="row pagina">
-    <%- include('menuLateral'); %>
-      <div class="col-md-9">
-        <div class="container">
-          <div class="row align-items-center mt-5">
-            <div class="col-sm-6">
-              <div class="row">
-                <h2 class="titulo2 text-center">Vamos treinar o robô?</h2>
-              </div>
-              <div class="row">
-                <p class="texto text-center">
-                  Para treinar o seu robô é muito simples,
-                  basta você clicar no botão "Treinar Robô". Ah!, não se esqueca
-                  de cadastrar as perguntas e respostas antes. Mas Caso quiser
-                  deletar a base de conhecimento do robô é só clicar na lixeira😔
-                </p>
-              </div>
-              <div class="row justify-content-center">
-                <!-- Button trigger modal -->
-                <button type="button" class="btnRobo w-75" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Treinar Robô
-                </button>
-              </div>
-            </div>
-            <div class="col-md-6 ">
-              <img class="w-75" src="./img/treinar.jpg" alt="">
-            </div>
-          </div>
+    <div class="col-md-3 menu g-0">
+      <ul class="list-group">
+        <li class="list-group-item menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center" href="/">
+            <i class="material-icons pe-2">home</i>HOME
+          </a>
+        </li>
 
-          <div class="row justify-content-end mt-5">
-            
-            <div class="mx-5 col-sm-2">
-              <!-- Button trigger modal -->
-              <button type="button" class="w-75 btnDelete" data-bs-toggle="modal" data-bs-target="#deletetreinamento">
-                <img class="w-100" src="./img/lixeira.png" alt="">
+        <li class="tLateral list-group-item menu pt-3 pb-3 d-flex align-items-center">
+          <i class="material-icons pe-2">computer</i>CADASTROS
+        </li>
+
+        <li class="list-group-item menu pt-3 pb-3 ps-5">
+          <a class="tLateral d-flex align-items-center" href="/cad-texto">
+            <i class="material-icons pe-2">subject</i>Mensagens de Texto
+          </a>
+        </li>
+
+        <li class="list-group-item menu pt-3 pb-3 ps-5">
+          <a class="tLateral d-flex align-items-center" href="/cad-midia">
+            <i class="material-icons pe-2">perm_media</i> Mensagens de Midias
+          </a>
+        </li>
+    
+        <li class="list-group-item menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center" href="/conversas-cadastradas">
+            <i class="material-icons pe-2">info</i>INFORMAÇÕES CADASTRADAS
+          </a>
+        </li>
+
+        <li class="list-group-item ativo menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center activoTexto" href="/treinar-robo">
+            <i class="material-icons pe-2">smart_toy</i>TREINAR ROBÔ
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-9">
+      <div class="container">
+        <div class="row align-items-center mt-5">
+          <div class="col-sm-6">
+            <div class="row">
+              <h2 class="titulo2 text-center">Vamos treinar o robô?</h2>
+            </div>
+            <div class="row">
+              <p class="texto text-center">
+                Para treinar o seu robô é muito simples,
+                basta você clicar no botão "Treinar Robô". Ah!, não se esqueca
+                de cadastrar as perguntas e respostas antes. Mas Caso quiser
+                deletar a base de conhecimento do robô é só clicar na lixeira😔
+              </p>
+            </div>
+            <div class="row justify-content-center">
+                <!-- Button trigger modal -->
+              <button type="button" class="btnRobo w-75" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Treinar Robô
               </button>
             </div>
           </div>
+          <div class="col-md-6 ">
+            <img class="w-75" src="./img/treinar.jpg" alt="">
+          </div>
+        </div>
+
+        <div class="row justify-content-end mt-5">   
+          <div class="mx-5 col-2">
+            <!-- Button trigger modal -->
+            <button type="button" class="w-75 btnDelete" data-bs-toggle="modal" data-bs-target="#deletetreinamento">
+              <img class="btnExcluirTreinamento" src="./img/lixeira.png" alt="">
+            </button>
+          </div>
         </div>
       </div>
+    </div>
   </div>
 
   <div class="d-md-flex justify-content-center ">
-    
     <div class="col-md-4">
-      <!-- Modal -->
+    <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -95,19 +129,15 @@
   </div>
 
   <% if(alertaTreinamento== 'ok'){%>
-    <div class=" alert alert-success alert-dismissible fade show alertaTreinamento" id="alertaOk"
-      role="alert">
+    <div class=" alert alert-success alert-dismissible fade show alertaTreinamento" id="alertaOk" role="alert">
       Operação realizada com sucesso!
-      <button type="button" class="btn-close" data-bs-dismiss="alert"
-        aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% }else if(alertaTreinamento == 'erro'){%>
-    <div class=" alert alert-danger alert-dismissible fade show alertaTreinamento" id="alertaErro"
-      role="alert">
+    <div class=" alert alert-danger alert-dismissible fade show alertaTreinamento" id="alertaErro" role="alert">
       Ocorreu um erro, tente novamente mais tarde!
-      <button type="button" class="btn-close" data-bs-dismiss="alert"
-        aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
   <% }%>
-  <%- include('rodape'); %>
+<%- include('rodape'); %>
