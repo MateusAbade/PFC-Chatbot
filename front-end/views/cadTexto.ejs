@@ -14,14 +14,14 @@
         </li>
 
         <li class="list-group-item menu ativo pt-3 pb-3 ps-5">
-          <a class="tLateral d-flex align-items-center activoTexto" href="/cad-texto">
+          <a class="tLateral d-flex align-items-center activoTexto" href="/cadastrar-texto">
             <i class="material-icons pe-2">subject</i>Mensagens de Texto
           </a>
         </li>
 
         <li class="list-group-item menu pt-3 pb-3 ps-5">
-          <a class="tLateral d-flex align-items-center" href="/cad-midia">
-            <i class="material-icons pe-2">perm_media</i> Mensagens de Midias
+          <a class="tLateral d-flex align-items-center" href="/cadastrar-media">
+            <i class="material-icons pe-2">perm_media</i> Mensagens de medias
           </a>
         </li>
     
@@ -45,7 +45,7 @@
         </div>
         <div class="row mb-3 d-flex justify-content-center">
           <div class="col-md-8 mt-5">
-            <form method="POST" action="/cadastrar-texto">
+            <form method="POST" action="/cadastrar-texto" id="cadTexto">
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Informe a pergunta</label>
                 <input type="text" name="perguntas" class="form-control" id="perguntas" required>
@@ -64,16 +64,5 @@
     </div>
   </div>
 
-  <% if(alertaCadastro == 'ok'){%>
-    <div class=" alert alert-success alert-dismissible fade show alertaTreinamento" id="alertaOk"role="alert">
-      Operação realizada com sucesso!
-      <button type="button" class="btn-close" data-bs-dismiss="alert"aria-label="Close"></button>
-    </div>
-  <% } else if(alertaCadastro == 'erro'){%>
-    <div class=" alert alert-danger alert-dismissible fade show alertaTreinamento" id="alertaErro" role="alert">
-      Ocorreu um erro, tente novamente mais tarde!
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
-  <% }%>
+<%- include('mensagem'); %> 
 <%- include('rodape'); %>

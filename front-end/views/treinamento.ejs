@@ -13,14 +13,14 @@
         </li>
 
         <li class="list-group-item menu pt-3 pb-3 ps-5">
-          <a class="tLateral d-flex align-items-center" href="/cad-texto">
+          <a class="tLateral d-flex align-items-center" href="/cadastrar-texto">
             <i class="material-icons pe-2">subject</i>Mensagens de Texto
           </a>
         </li>
 
         <li class="list-group-item menu pt-3 pb-3 ps-5">
-          <a class="tLateral d-flex align-items-center" href="/cad-midia">
-            <i class="material-icons pe-2">perm_media</i> Mensagens de Midias
+          <a class="tLateral d-flex align-items-center" href="/cadastrar-media">
+            <i class="material-icons pe-2">perm_media</i> Mensagens de medias
           </a>
         </li>
     
@@ -47,9 +47,10 @@
             <div class="row">
               <p class="texto text-center">
                 Para treinar o seu robô é muito simples,
-                basta você clicar no botão "Treinar Robô". Ah!, não se esqueca
-                de cadastrar as perguntas e respostas antes. Mas Caso quiser
-                deletar a base de conhecimento do robô é só clicar na lixeira😔
+                basta você clicar no botão "Treinar Robô". Ah!, não se esqueça
+                de cadastrar as perguntas e respostas antes. 
+                Caso quiser deletar a base de conhecimento do 
+                robô é só clicar na lixeira😔
               </p>
             </div>
             <div class="row justify-content-center">
@@ -79,7 +80,8 @@
   <div class="d-md-flex justify-content-center ">
     <div class="col-md-4">
     <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" 
+      aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -128,16 +130,5 @@
     </div>
   </div>
 
-  <% if(alertaTreinamento== 'ok'){%>
-    <div class=" alert alert-success alert-dismissible fade show alertaTreinamento" id="alertaOk" role="alert">
-      Operação realizada com sucesso!
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% }else if(alertaTreinamento == 'erro'){%>
-    <div class=" alert alert-danger alert-dismissible fade show alertaTreinamento" id="alertaErro" role="alert">
-      Ocorreu um erro, tente novamente mais tarde!
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
-  <% }%>
+<%- include('mensagem'); %>
 <%- include('rodape'); %>

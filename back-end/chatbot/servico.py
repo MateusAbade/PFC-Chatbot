@@ -5,6 +5,7 @@ from chatterbot.response_selection import get_first_response
 import psycopg2.extras
 import psycopg2
 from chatterbot.trainers import ListTrainer
+import os
 
 
 servico = Flask(__name__)
@@ -70,6 +71,23 @@ def cadastrar_resposta():
 
     return resultado
 
+@servico.route("/medias", methods=['POST'])
+def cadastrar_medias():
+    media = request.values.get('media')
+    resultado = "ok"
+    conexao = get_conexao_bd()
+    cursor = conexao.cursor()
+    try:
+        cursor.execute(
+            f"INSERT INTO medias (media) values ('{media}')")
+        conexao.commit()
+
+    except Exception as e:
+        conexao.rollback()
+        resultado = "erro", e
+
+    return resultado
+
 
 @servico.route("/editar-conversas", methods=['POST'])
 def editar_conversas():
@@ -109,6 +127,18 @@ def get_conversas():
         conversas.append(carregar_conversas(registro))
     return jsonify(conversas)
 
+@servico.route("/get-medias-cadastradas", methods=['GET'])
+def get_medias():
+    medias = []
+    conexao = get_conexao_bd()
+    cursor = conexao.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    cursor.execute(
+        "select id, media from medias")
+    resultado = cursor.fetchall()
+    for registro in resultado:
+        medias.append(carregar_medias(registro))
+    return jsonify(medias)
+
 
 def buscar_conversas():
     conversas = []
@@ -131,6 +161,14 @@ def carregar_conversas(registro):
 
     return conversas
 
+def carregar_medias(registro):
+    medias = {
+        "id": registro["id"],
+        "media": registro["media"]
+    }
+
+    return medias
+
 @servico.route("/excluir-conversas/<int:id>")
 def excluir_converas(id):
     resultado = "ok"
@@ -138,6 +176,20 @@ def excluir_converas(id):
     cursor = conexao.cursor()
     try:
         cursor.execute(f"delete from resposta where id={id}")
+        conexao.commit()
+    except Exception as e:
+        conexao.rollback()
+        resultado = "erro", e
+
+    return resultado
+
+@servico.route("/excluir-medias/<int:id>")
+def excluir_medias(id):
+    resultado = "ok"
+    conexao = get_conexao_bd()
+    cursor = conexao.cursor()
+    try:
+        cursor.execute(f"delete from medias where id={id}")
         conexao.commit()
     except Exception as e:
         conexao.rollback()

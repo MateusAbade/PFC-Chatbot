@@ -24,16 +24,24 @@ const cadastrarRespostas = async (resposta) => {
 const cadastrarPerguntas = async (perguntas, resposta) => {
   return acessarURL(CHATBOT_URL + "perguntas", { 'question': perguntas, 'response': resposta })
 }
+const cadastrarMedias = async (media) => {
+  return acessarURL(CHATBOT_URL + "medias", { 'media': media})
+}
+
 
 const treinarRobo = async () => {
   return acessarURL(CHATBOT_URL + "treinar", null)
 }
 
-const excluirTreinamento = async () => {
-  return acessarURL(CHATBOT_URL + "excluir-treinamento ", ({ 'delete': "SIM" }))
-}
 const getConversas = async () => {
   return acessarURL(CHATBOT_URL + "get-conversas-cadastradas", null)
+}
+const getMedias = async () => {
+  return acessarURL(CHATBOT_URL + "get-medias-cadastradas", null)
+}
+
+const excluirTreinamento = async () => {
+  return acessarURL(CHATBOT_URL + "excluir-treinamento ", ({ 'delete': "SIM" }))
 }
 
 const editarConversas = async (id_pergunta, id_resposta, perguntas, resposta) => {
@@ -42,7 +50,20 @@ const editarConversas = async (id_pergunta, id_resposta, perguntas, resposta) =>
 const excluirConversas = async (id) => {
   return acessarURL(CHATBOT_URL + "excluir-conversas/"+id, null)
 }
+const excluirMedias = async (id) => {
+  return acessarURL(CHATBOT_URL + "excluir-medias/"+id, null)
+}
 
 
 
-module.exports = { acessarURL, cadastrarRespostas, cadastrarPerguntas, treinarRobo, excluirTreinamento, getConversas, editarConversas, excluirConversas }
+module.exports = { acessarURL, 
+  cadastrarRespostas, 
+  cadastrarPerguntas,
+  cadastrarMedias, 
+  treinarRobo, 
+  excluirTreinamento, 
+  getConversas, 
+  getMedias, 
+  editarConversas, 
+  excluirConversas,
+  excluirMedias}

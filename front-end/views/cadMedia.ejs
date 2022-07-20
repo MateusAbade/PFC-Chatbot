@@ -13,14 +13,14 @@
         </li>
 
         <li class="list-group-item menu pt-3 pb-3 ps-5">
-          <a class="tLateral d-flex align-items-center" href="/cad-texto">
+          <a class="tLateral d-flex align-items-center" href="/cadastrar-texto">
             <i class="material-icons pe-2">subject</i>Mensagens de Texto
           </a>
         </li>
 
         <li class="list-group-item ativo menu pt-3 pb-3 ps-5">
-          <a class="tLateral d-flex align-items-center activoTexto" href="/cad-midia">
-            <i class="material-icons pe-2">perm_media</i> Mensagens de Midias
+          <a class="tLateral d-flex align-items-center activoTexto" href="/cadastrar-media">
+            <i class="material-icons pe-2">perm_media</i> Mensagens de medias
           </a>
         </li>
     
@@ -41,14 +41,14 @@
     <div class="col-md-9">
       <div class="container">
         <div class="row">
-          <h2 class="mt-4 titulo2">Cadastro de perguntas e respostas com midias</h2>
+          <h2 class="mt-4 titulo2">Cadastro de perguntas e respostas com medias</h2>
         </div>
 
         <div class="row mb-3 d-flex justify-content-center">
           <div class="col-md-8 mt-5">
-            <form method="POST" enctype="multipart/form-data" action="/cadastrar-midia">
+            <form method="POST" enctype="multipart/form-data" action="/cadastrar-media">
               <div id="arquivoLocal" class="mb-3 mt-3">
-                <label for="exampleFormControlFile1" class="form-label d-block">Selecone a mídia</label>
+                <label for="exampleFormControlFile1" class="form-label d-block">Selecone a media</label>
                 <input type="file" name="file" class="form-control-file input" id="inputLocal" required>
               </div>
 
@@ -79,15 +79,5 @@
     </div>
   </div>
 
-  <% if(alertaCadastro == 'ok'){%>
-    <div class=" alert alert-success alert-dismissible fade show alertaTreinamento" id="alertaOk" role="alert">
-      Operação realizada com sucesso!
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% }else if(alertaCadastro == 'erro'){%>
-    <div class=" alert alert-danger alert-dismissible fade show alertaTreinamento" id="alertaErro" role="alert">
-      Ocorreu um erro, tente novamente mais tarde!
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% }%>
+<%- include('mensagem'); %> 
 <%- include('rodape'); %>

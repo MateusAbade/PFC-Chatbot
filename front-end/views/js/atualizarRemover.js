@@ -18,12 +18,14 @@ function editarInformacao(id_pergunta, id_resposta, pergunta, resposta) {
 	inputPergunta.name = "pergunta"
 	inputPergunta.className = "form-control"
 	inputPergunta.value = pergunta
+	inputPergunta.setAttribute('required', '');
 
 	let inputResposta = document.createElement('input')
 	inputResposta.type = "text"
 	inputResposta.name = "resposta"
 	inputResposta.className = "form-control"
 	inputResposta.value = resposta
+	inputResposta.setAttribute('required', '');
 
 	let inputIdPergunta = document.createElement('input')
 	inputIdPergunta.type = "hidden"
@@ -60,3 +62,8 @@ function editarInformacao(id_pergunta, id_resposta, pergunta, resposta) {
 function deletarInformacao(id) {
 	location.href = '/excluir-conversas/' + id;
 }
+
+function deletarMedia(id) {
+	location.href = '/excluir-medias/' + id;
+}
+

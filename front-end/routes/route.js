@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const conversas = require('../api/index.js');
+const fs = require('fs');
 
 
 const cyrb53 = function(str, seed = 0) {
@@ -41,119 +42,167 @@ const upload = multer({ storage })
 
 //Rotas das páginas 
 router.get('/', (req, res) => {
-    res.render('index.ejs', {teste: 'ola'});
+    res.render('index.ejs');
 });
-router.get('/cad-texto', (req, res) => {
-    res.render('cadTexto.ejs', { alertaCadastro: '' });
+router.get('/cadastrar-texto', (req, res) => {
+    res.render('cadTexto.ejs');
 });
-router.get('/cad-midia', (req, res) => {
-    res.render('cadMidia.ejs', { alertaCadastro: '' });
+router.get('/cadastrar-media', (req, res) => {
+    res.render('cadMedia.ejs');
 });
 router.get('/conversas-cadastradas', (req, res) => {
     conversas.getConversas().then(conversasCadastradas => {
         res.render('conversasCadastradas.ejs', { dados: conversasCadastradas, alertaDelete: '' });
     });
 });
+
+router.get('/medias-cadastradas', (req, res) => {
+    conversas.getMedias().then(mediasCadastradas => {
+        res.render('mediasCadastradas.ejs', { dados: mediasCadastradas, alertaDelete: '' });
+    });
+});
 router.get('/treinar-robo', (req, res) => {
-    res.render('treinamento.ejs', { alertaTreinamento: '' });
+    res.render('treinamento.ejs');
 });
 
 
 //Rotas de cadastros das perguntas e respostas no banco
 router.post('/cadastrar-texto', (req, res) => {
-    conversas.cadastrarRespostas(req.body.resposta).then(v => {
-        let alerta;
-        if (v == 'ok') {
-            conversas.cadastrarPerguntas(req.body.perguntas, req.body.resposta);
-            alerta = 'ok';
+    conversas.cadastrarRespostas(req.body.resposta).then(retronoCadastro => {
+        if (retronoCadastro == 'ok') {
+            conversas.cadastrarPerguntas(req.body.perguntas, req.body.resposta).then ( retronoCadastro =>{
+                req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
+                res.redirect('/cadastrar-texto');
+            })
         } else {
-            alerta = 'erro';
+            req.flash('mensagemErro', 'Ocorreu um erro, tente novamente!');
+            res.redirect('/cadastrar-texto');
         }
-        res.render('cadTexto.ejs',{ alertaCadastro: alerta });
+        
     });
-    
 });
 
-router.post('/cadastrar-midia', upload.single('file'), (req, res) => {
+router.post('/cadastrar-media', upload.single('file'), (req, res) => {
     let resposta;
 
     if (req.body.url != '') {
-        resposta = "!" + req.body.url + "!";
+        resposta = '!' + req.body.url + '!';
     } else {
         if ((extensao == '.jpg') || (extensao == '.png') || (extensao == '.jpeg')) {
-            resposta = "<" + nomeArquivo + ">";
+            resposta = '<' + nomeArquivo + '>';
         }
         else if (extensao == '.pdf') {
-            resposta = "$" + nomeArquivo + "$";
+            resposta = '$' + nomeArquivo + '$';
 
         } else if ((extensao == '.mp4') || (extensao == '.avi') || (extensao == '.wmv')) {
-            resposta = "%" + nomeArquivo + "%";
+            resposta = '%' + nomeArquivo + '%';
         }
         else {
-            resposta = "?" + nomeArquivo + "?";
+            resposta = '?' + nomeArquivo + '?';
         }
     }
-    conversas.cadastrarRespostas(resposta).then(v => {
-        let alerta;
-        if (v == 'ok') {
-            conversas.cadastrarPerguntas(req.body.perguntas, resposta);
-            alerta = 'ok';
+    conversas.cadastrarRespostas(resposta).then(retronoCadastro => {
+        if (rR === 'ok') {
+            conversas.cadastrarPerguntas(req.body.perguntas, resposta).then ( retronoCadastro =>{
+                req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
+                res.redirect('/cadastrar-media');
+            })
         } else {
-            alerta = 'erro';
+            req.flash('mensagemErro', 'Ocorreu um erro, tente novamente!');
+            res.redirect('/cadastrar-media');
         }
-        res.render('cadMidia.ejs', { alertaCadastro: alerta });
+        
     });
-
-    
 });
+
 
 router.post('/editar-informacao', (req, res) => {
-    conversas.editarConversas(req.body.id_pergunta, req.body.id_resposta, req.body.pergunta, req.body.resposta).then(retorno => {
-        if (retorno === "ok") {
-            conversas.getConversas().then(conversasCadastradas => {
-                res.render('conversasCadastradas.ejs', { dados: conversasCadastradas, alertaDelete: 'ok' });
-            });
+    conversas.editarConversas(req.body.id_pergunta, req.body.id_resposta, req.body.pergunta, req.body.resposta).then(retronoEditar => {
+        if (retronoEditar === 'ok') {
+            req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
+            res.redirect('/conversas-cadastradas');
+
         } else {
-            res.render('conversasCadastradas.ejs', { alertaDelete: 'erro' });
+            req.flash('mensagemErro', 'Ocorreu um erro, tente novamente!');
+            res.redirect('/conversas-cadastradas');
+        }
+    });
+});
+router.get('/excluir-conversas/:id', (req, res) => {
+    conversas.excluirConversas(req.params.id).then(retornoExcluir => {
+        if (retornoExcluir === 'ok') {
+            req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
+            res.redirect('/conversas-cadastradas');
+        } else {
+            req.flash('mensagemErro', 'Ocorreu um erro, tente novamente!');
+            res.redirect('/conversas-cadastradas');
         }
     });
 });
 
-router.get('/excluir-conversas/:id', (req, res) => {
-    conversas.excluirConversas(req.params.id).then(retorno => {
-        if (retorno === "ok") {
-            conversas.getConversas().then(conversasCadastradas => {
-                res.render('conversasCadastradas.ejs', { dados: conversasCadastradas, alertaDelete: 'ok' });
-            });
-        } else {
-            res.render('conversasCadastradas.ejs', { alertaDelete: 'erro' });
+router.get('/excluir-medias/:id', (req, res) => {
+    conversas.getMedias().then(mediasCadastradas => {
+
+    let fileName = mediasCadastradas.filter(media => media.id == req.params.id)
+    fileName = fileName[0].media
+    ext = path.extname(fileName);
+
+    if(ext == '.pdf'){
+        fileName = 'upload/pdf/'+fileName
+    }else if (ext == '.png' || ext == '.jpg' || ext == '.jpeg'){
+        fileName = 'upload/img/'+fileName
+    }else if (ext == '.mp4' || ext == '.avi' || ext == '.wmv'){
+        fileName = 'upload/video/'+fileName
+    }else{
+        fileName = 'upload/outros/'+fileName
+    } 
+
+    fs.rm(__dirname.replace('routes', '')+fileName, { recursive:true }, (err) => {
+        if(err){
+            console.error(err.message);
+            return;
         }
+        console.log('Arquivo deletado!');
+
+        conversas.excluirMedias(req.params.id).then(retornoExcluir => {
+            if (retornoExcluir === 'ok') {
+                req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
+                res.redirect('/medias-cadastradas');
+            } else {
+                req.flash('mensagemErro', 'Ocorreu um erro, tente novamente!');
+                res.redirect('/medias-cadastradas');
+            }
+        });
+
+    })
+    
     });
+    
 });
 
 //Rotas do robô
 
 router.post('/treinar-robo', (req, res) => {
-    conversas.treinarRobo().then(retorno => {
-        let alerta;
-        if (retorno == "ok") {
-            alerta = 'ok';
+    conversas.treinarRobo().then(retornoTreinar => {
+        if (retornoTreinar === 'ok') {
+            req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
+            res.redirect('/treinar-robo');
         } else {
-            alerta = 'erro';
+            req.flash('mensagemErro', 'Ocorreu um erro, tente novamente!');
+            res.redirect('/treinar-robo');
         }
-        res.render('treinamento.ejs', { alertaTreinamento: alerta});
     })
 });
 
 router.post('/excluir-treinamento', (req, res) => {
     conversas.excluirTreinamento().then(retorno => {
-        let alerta;
-        if (retorno == "ok") {
-            alerta = 'ok';
+        if (retorno === 'ok') {
+            req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
+            res.redirect('/treinar-robo');
         } else {
-            alerta =   'erro';
+            req.flash('mensagemErro', 'Ocorreu um erro, tente novamente!');
+            res.redirect('/treinar-robo');
         }
-        res.render('treinamento.ejs', { alertaTreinamento: alerta});
     })
 });
 

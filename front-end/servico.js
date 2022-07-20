@@ -6,11 +6,26 @@ const server = http.Server(app);
 const io = require('socket.io')(server);
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const flash = require('connect-flash');
+require('dotenv').config();
+
+app.use(session({
+    secret:'pfcbot',
+    saveUninitialized: true,
+    resave: true
+}));
+  
+app.use(flash());
+
+app.use((req, res, next)=>{
+    res.locals.mensagemSucesso = req.flash('mensagemSucesso')
+    res.locals.mensagemErro = req.flash('mensagemErro')
+    next()
+})
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-require('dotenv').config()
-
-console.log(process.env.APP_HOST);
 
 app.use(express.static(path.join(__dirname, 'views')));
 
