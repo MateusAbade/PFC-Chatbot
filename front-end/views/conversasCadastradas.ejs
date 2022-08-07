@@ -73,6 +73,30 @@
 	      </div>
 		  <% } %>
 	    </div>
+
+		<!-- <% var itemPorPagina = 5; %>
+		<% var totalRegistro = dados.length; %>
+		<% var numPaginas = Math.ceil(totalRegistro/itemPorPagina);  %>
+		<nav aria-label="...">
+			<ul class="pagination">
+			  <li class="page-item">
+				<a href="conversas-cadastradas?pagina=0"><span class="page-link">Próxima</span></a>
+			  </li>
+			  <%=numPaginas%>
+			  <% for(let i=0; i < numPaginas; i++){
+			 	var estilo = '';
+				 
+			  		estilo = 'class=\"active\"';
+				 %>
+				<li <%= estilo %> aria-current="page">
+					<a class="page-link" href="conversas-cadastradas?pagina=<%= numPaginas-1 %>"><%= i+1 %></a>
+				</li>
+			  <% }%>	
+			  <li class="page-item">
+				<a href="conversas-cadastradas?pagina=0"><span class="page-link">última</span></a>
+			  </li>
+			</ul>
+		  </nav> -->
 	  </div>
 	</div>
   </div>

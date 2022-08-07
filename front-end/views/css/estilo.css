@@ -145,7 +145,7 @@ a {
 }
 
 .tabela2{
-	height: 400px;
+	height: 289px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
@@ -208,7 +208,8 @@ a {
     width: 500px;
     background-image: linear-gradient(#A67FF6, #A67FF6);
     left: auto !important;
-    box-shadow: 0px 2px 5px rgb(50 50 50 / 86%)
+    box-shadow: 0px 2px 5px rgb(50 50 50 / 86%);
+    margin: 25px;
 }
 
 .btnRobo {
@@ -301,6 +302,9 @@ a {
     }
     .btnExcluirTreinamento{
         width: 60px;
+    }
+    .bot {
+        margin: 0;
     }
 
 }

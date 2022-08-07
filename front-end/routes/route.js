@@ -69,7 +69,7 @@ router.get('/treinar-robo', (req, res) => {
 //Rotas de cadastros das perguntas e respostas no banco
 router.post('/cadastrar-texto', (req, res) => {
     conversas.cadastrarRespostas(req.body.resposta).then(retronoCadastro => {
-        if (retronoCadastro == 'ok') {
+        if (retronoCadastro != 'erro') {
             conversas.cadastrarPerguntas(req.body.perguntas, req.body.resposta).then ( retronoCadastro =>{
                 req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
                 res.redirect('/cadastrar-texto');
@@ -101,8 +101,9 @@ router.post('/cadastrar-media', upload.single('file'), (req, res) => {
             resposta = '?' + nomeArquivo + '?';
         }
     }
+    conversas.cadastrarMedias(nomeArquivo);
     conversas.cadastrarRespostas(resposta).then(retronoCadastro => {
-        if (rR === 'ok') {
+        if (retronoCadastro === 'ok') {
             conversas.cadastrarPerguntas(req.body.perguntas, resposta).then ( retronoCadastro =>{
                 req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
                 res.redirect('/cadastrar-media');
@@ -142,39 +143,38 @@ router.get('/excluir-conversas/:id', (req, res) => {
 
 router.get('/excluir-medias/:id', (req, res) => {
     conversas.getMedias().then(mediasCadastradas => {
+        let fileName = mediasCadastradas.filter(media => media.id == req.params.id)
+        fileName = fileName[0].media
+        ext = path.extname(fileName);
 
-    let fileName = mediasCadastradas.filter(media => media.id == req.params.id)
-    fileName = fileName[0].media
-    ext = path.extname(fileName);
+        if(ext == '.pdf'){
+            fileName = 'upload/pdf/'+fileName
+        }else if (ext == '.png' || ext == '.jpg' || ext == '.jpeg'){
+            fileName = 'upload/img/'+fileName
+        }else if (ext == '.mp4' || ext == '.avi' || ext == '.wmv'){
+            fileName = 'upload/video/'+fileName
+        }else{
+            fileName = 'upload/outros/'+fileName
+        } 
 
-    if(ext == '.pdf'){
-        fileName = 'upload/pdf/'+fileName
-    }else if (ext == '.png' || ext == '.jpg' || ext == '.jpeg'){
-        fileName = 'upload/img/'+fileName
-    }else if (ext == '.mp4' || ext == '.avi' || ext == '.wmv'){
-        fileName = 'upload/video/'+fileName
-    }else{
-        fileName = 'upload/outros/'+fileName
-    } 
-
-    fs.rm(__dirname.replace('routes', '')+fileName, { recursive:true }, (err) => {
-        if(err){
-            console.error(err.message);
-            return;
-        }
-        console.log('Arquivo deletado!');
-
-        conversas.excluirMedias(req.params.id).then(retornoExcluir => {
-            if (retornoExcluir === 'ok') {
-                req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
-                res.redirect('/medias-cadastradas');
-            } else {
-                req.flash('mensagemErro', 'Ocorreu um erro, tente novamente!');
-                res.redirect('/medias-cadastradas');
+        fs.rm(__dirname.replace('routes', '')+fileName, { recursive:true }, (err) => {
+            if(err){
+                console.error(err.message);
+                return;
             }
-        });
+            console.log('Arquivo deletado!');
 
-    })
+            conversas.excluirMedias(req.params.id).then(retornoExcluir => {
+                if (retornoExcluir === 'ok') {
+                    req.flash('mensagemSucesso', 'Operação realizada com sucesso!');
+                    res.redirect('/medias-cadastradas');
+                } else {
+                    req.flash('mensagemErro', 'Ocorreu um erro, tente novamente!');
+                    res.redirect('/medias-cadastradas');
+                }
+            });
+
+        })
     
     });
     

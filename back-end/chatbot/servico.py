@@ -1,21 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask_socketio import SocketIO, emit
 from chatterbot import ChatBot
 from chatterbot.response_selection import get_first_response
-import psycopg2.extras
-import psycopg2
 from chatterbot.trainers import ListTrainer
-import os
+import consultas_bd
 
 
 servico = Flask(__name__)
 io = SocketIO(servico, cors_allowed_origins="*")
 
-# Conexão com o banco
-def get_conexao_bd():
-    conexao = psycopg2.connect(
-        host='bancodados', user='mateus', password='park22', database='chatbot')
-    return conexao
 
 # Rota de teste
 @servico.route('/')
@@ -25,177 +18,35 @@ def p_controle():
 # Funções de gerenciamento das informações armazenadas no banco
 @servico.route("/perguntas", methods=['POST'])
 def cadastrar_perguntas():
-    perguntas = request.values.get('question')
-    resposta = request.values.get('response')
-    resultado = "ok"
-    conexao = get_conexao_bd()
-    cursor = conexao.cursor()
-    cursor.execute(f"select id from resposta where resposta ='{resposta}'")
-    res = cursor.fetchone()
-    try:
-
-        if (res != None) and (perguntas != ""):
-            cursor.execute(
-                f"INSERT INTO perguntas(pergunta, id_resposta) values ('{perguntas}', '{res[0]}')")
-            conexao.commit()
-        else:
-            resultado = "Não foi possível inserir a pergunta"
-
-    except Exception as e:
-        conexao.rollback()
-        resultado = "erro", e
-
-    return resultado
-
+   return consultas_bd.cadastrar_perguntas()
 
 @servico.route("/resposta", methods=['POST'])
 def cadastrar_resposta():
-    resposta = request.values.get("response")
-    resultado = "ok"
-    conexao = get_conexao_bd()
-    cursor = conexao.cursor()
-    cursor.execute(
-        f"select resposta from resposta where resposta ='{resposta}'")
-    res = cursor.fetchone()
-    try:
-        if (resposta != "") and (res != resposta if res == None else res[0] != resposta):
-            cursor.execute(
-                f"INSERT INTO resposta(resposta) values ('{resposta}')")
-            conexao.commit()
-        else:
-            resultado = "Não foi possível inserir a resposta"
-
-    except Exception as e:
-        conexao.rollback()
-        resultado = "erro", e
-
-    return resultado
-
+    return consultas_bd.cadastrar_resposta()
+    
 @servico.route("/medias", methods=['POST'])
 def cadastrar_medias():
-    media = request.values.get('media')
-    resultado = "ok"
-    conexao = get_conexao_bd()
-    cursor = conexao.cursor()
-    try:
-        cursor.execute(
-            f"INSERT INTO medias (media) values ('{media}')")
-        conexao.commit()
-
-    except Exception as e:
-        conexao.rollback()
-        resultado = "erro", e
-
-    return resultado
-
+    return consultas_bd.cadastrar_medias()
 
 @servico.route("/editar-conversas", methods=['POST'])
 def editar_conversas():
-    id_pergunta = request.values.get("id_pergunta")
-    id_resposta = request.values.get("id_resposta")
-    pergunta = request.values.get("question")
-    resposta = request.values.get("response")
-    resultado = "ok"
-    conexao = get_conexao_bd()
-    cursor = conexao.cursor()
-    try:
-        if (pergunta != "") or (resposta != ""):
-            cursor.execute(
-                f"UPDATE perguntas SET pergunta = '{pergunta}' WHERE id ='{id_pergunta}'")
-            conexao.commit()
-            cursor.execute(
-                f"UPDATE resposta SET resposta = '{resposta}' WHERE id ='{id_resposta}'")
-            conexao.commit()
-        else:
-            resultado = "Não foi possível atualizar as informações"
-
-    except Exception as e:
-        conexao.rollback()
-        resultado = "erro", e
-
-    return resultado
+    return consultas_bd.editar_conversas()
 
 @servico.route("/get-conversas-cadastradas", methods=['GET'])
 def get_conversas():
-    conversas = []
-    conexao = get_conexao_bd()
-    cursor = conexao.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cursor.execute(
-        "select p.id as id_pergunta, r.id as id_resposta,  pergunta, resposta from perguntas p join resposta r on p.id_resposta=r.id")
-    resultado = cursor.fetchall()
-    for registro in resultado:
-        conversas.append(carregar_conversas(registro))
-    return jsonify(conversas)
+    return consultas_bd.get_conversas()
 
 @servico.route("/get-medias-cadastradas", methods=['GET'])
 def get_medias():
-    medias = []
-    conexao = get_conexao_bd()
-    cursor = conexao.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cursor.execute(
-        "select id, media from medias")
-    resultado = cursor.fetchall()
-    for registro in resultado:
-        medias.append(carregar_medias(registro))
-    return jsonify(medias)
-
-
-def buscar_conversas():
-    conversas = []
-    conexao = get_conexao_bd()
-    cursor = conexao.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cursor.execute(
-        "select p.id as id_pergunta, r.id as id_resposta, pergunta, resposta from perguntas p join resposta r on p.id_resposta=r.id")
-    resultado = cursor.fetchall()
-    for registro in resultado:
-        conversas.append(carregar_conversas(registro))
-    return conversas
-
-def carregar_conversas(registro):
-    conversas = {
-        "id_pergunta": registro["id_pergunta"],
-        "pergunta": [registro["pergunta"]],
-        "id_resposta": registro["id_resposta"],
-        "resposta": registro["resposta"]
-    }
-
-    return conversas
-
-def carregar_medias(registro):
-    medias = {
-        "id": registro["id"],
-        "media": registro["media"]
-    }
-
-    return medias
+    return consultas_bd.get_medias()
 
 @servico.route("/excluir-conversas/<int:id>")
 def excluir_converas(id):
-    resultado = "ok"
-    conexao = get_conexao_bd()
-    cursor = conexao.cursor()
-    try:
-        cursor.execute(f"delete from resposta where id={id}")
-        conexao.commit()
-    except Exception as e:
-        conexao.rollback()
-        resultado = "erro", e
-
-    return resultado
+    return consultas_bd.excluir_converas(id)
 
 @servico.route("/excluir-medias/<int:id>")
 def excluir_medias(id):
-    resultado = "ok"
-    conexao = get_conexao_bd()
-    cursor = conexao.cursor()
-    try:
-        cursor.execute(f"delete from medias where id={id}")
-        conexao.commit()
-    except Exception as e:
-        conexao.rollback()
-        resultado = "erro", e
-
-    return resultado
+    return consultas_bd.excluir_medias(id)
 
 
 # robô
@@ -225,7 +76,7 @@ def iniciar():
 @servico.route("/treinar")
 def treinar_robo():
     iniciar()
-    conversas = buscar_conversas()
+    conversas = consultas_bd.buscar_conversas()
     resultado = "ok"
     global treinador
     try:
@@ -243,22 +94,8 @@ def treinar_robo():
 
 @servico.route("/excluir-treinamento", methods=['POST'])
 def excluir_treinamento():
-    resposta = request.values.get("delete")
-    if(resposta == "SIM"):
-        resultado = "ok"
-        conexao = get_conexao_bd()
-        cursor = conexao.cursor()
-        try:
-            cursor.execute("DROP TABLE if exists tag cascade")
-            cursor.execute("DROP TABLE if exists tag_association cascade")
-            cursor.execute("DROP TABLE if exists statement cascade")
-            conexao.commit()
+    return consultas_bd.excluir_treinamento()
 
-        except Exception as e:
-            conexao.rollback()
-            resultado = "erro", e
-
-        return resultado
 # conversas do robô
 @io.on('sendMessage')
 def send_message(msg):

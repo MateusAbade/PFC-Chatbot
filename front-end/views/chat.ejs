@@ -1,16 +1,16 @@
 <div class="row" id="chat">
   <div class="col d-flex justify-content-end fixed-bottom ">
 
-    <button class="btnRobo m-3" id="btnRobo" type="button" data-bs-toggle="offcanvas" 
+    <button class="btnRobo m-3" id="btnRobo" onclick="ocultarBtnChat()" type="button" data-bs-toggle="offcanvas" 
     data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Chamar Robô</button>
 
     <form action="">
-      <div class="offcanvas offcanvas-bottom bot m-3" data-bs-scroll="true" data-bs-backdrop="false" 
+      <div class="offcanvas offcanvas-bottom bot" data-bs-scroll="true" data-bs-backdrop="false" 
       tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
         <div class="offcanvas-header">
           <img src="./img/cabecaRobo2.png" alt="">
           <h1 class="offcanvas-title tituloBot" id="offcanvasScrollingLabel">ChatBot</h1>
-          <button type="button" class="btnBot" data-bs-dismiss="offcanvas" aria-label="Close">
+          <button type="button" class="btnBot" onclick="mostrarBtnChat()" id="btnClose" data-bs-dismiss="offcanvas" aria-label="Close">
             <i class="material-icons icone">expand_more</i>
           </button>
         </div>

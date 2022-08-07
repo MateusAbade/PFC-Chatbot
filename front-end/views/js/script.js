@@ -22,13 +22,12 @@ function clique(url, tipo){
   }
 }
 function ocultarBtnChat(){
-  var chat = document.getElementById('chat');
-  var btnFechar = document.getElementById('chatClose');
-  chat.style.display="none";
-
-  btnFechar.onclick=function(){
-    chat.style.display="flex";
-  }
+  var btnRobo = document.getElementById('btnRobo');
+  btnRobo.style.display="none";
+}
+function mostrarBtnChat(){
+  var btnRobo = document.getElementById('btnRobo');
+  btnRobo.style.display="flex";
 }
 
 function arquivoUrl(valor){
@@ -56,9 +55,16 @@ function displayCarregar(){
 
 
 setTimeout(function () {
-  document.getElementById('alertaOk').style.display= "none";
+  let alertaOk = document.getElementById('alertaOk')
+  if (alertaOk !== null){
+    alertaOk.style.display= "none";
+  }
 }, 3000);
+
 setTimeout(function () {
-  document.getElementById('alertaErro').style.display= "none";
+  let alertaErro = document.getElementById('alertaErro')
+  if (alertaErro !== null){
+    alertaErro.style.display= "none";
+  }
 }, 3000);
 
