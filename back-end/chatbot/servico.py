@@ -103,8 +103,7 @@ def send_message(msg):
     print(resposta.text)
     print(resposta.confidence)
 
-    mensagem = "Poxa! no momento ainda não sei como te responder,",
-    "mas você pode fazer outra pergunta..."
+    mensagem = "Poxa! no momento ainda não sei como te responder, mas você pode fazer outra pergunta..."
 
     if(resposta.confidence > 0.5):
         mensagem = resposta.text
