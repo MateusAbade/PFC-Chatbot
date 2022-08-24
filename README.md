@@ -31,5 +31,5 @@
 - Clique no botão "Treinar robô";
 
  Conversar com o robô
-- Na Página inicial clique "Chamar robô:
+- Na Página inicial clique "Chamar robô";
 - Insira uma pergunta para iniciar uma conversa;
