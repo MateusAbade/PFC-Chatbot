@@ -44,6 +44,9 @@ const upload = multer({ storage })
 router.get('/', (req, res) => {
     res.render('index.ejs');
 });
+router.get('/chatbot', (req, res) => {
+    res.render('chatbot.ejs');
+});
 router.get('/cadastrar-texto', (req, res) => {
     res.render('cadTexto.ejs');
 });

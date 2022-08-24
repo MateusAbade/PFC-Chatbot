@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatBot de suporte</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/bootstrap-5.1.3/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/estilo.css">
+</head>
+
+<body>
+  <nav class="navbar nav-color  lnavbar sticky-md-top">
+    <div class="container-fluid">
+      <div class="col-2 d-flex justify-content-start"></div>
+      <div class="col-8 d-flex justify-content-center ">
+        <a class="navbarubrand tPrincipal logo" href="/">ChatBot de Suporte</a>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <a href="#"><i class="material-icons icone btnHover">help</i></a>
+      </div>
+  </nav>
+  <div class="row pagina">
+
+    <div class="col-md-9">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="row mb-3 d-flex align-items-center">
+              <img class="w-100" src="./img//Wavy_Tech-12_Single-041.jpg" alt="">
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="row mb-3">
+              <div class="row">
+                <div class="mt-5 col">
+                  <h2 class="titulo2 text-center">Bem-vindo ao ambiente de suporte</h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p class="texto text-center">
+                    Para inciar um atendimento basta clicar em "Chamar robô" e em seguida inserir uma pergunta. 
+                    Nosso assistente está preparado para te auxiliar nessa jornada respondendo a suas dúvidas. Aproveite! 🙃
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3 d-flex align-items-center">
+          <%- include('chat'); %>
+        </div>
+      </div>
+      <div id="janelaModal">
+        <div>
+          <button type="button" id="btnFechar" data-bs-dismiss="offcanvas" aria-label="Close"><i
+              class="material-icons icone">close</i></button>
+        </div>
+        <img id="imgModal">
+      </div>
+    </div>
+  </div>
+
+<%- include('rodape'); %>
