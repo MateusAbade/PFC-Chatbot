@@ -13,7 +13,7 @@
 
  Criar e executar containers dockers:
 - Navegue até o local do arquivo pela linha de comando do sistema operacional. Exemplo cd c: cd /Área de Trabalho/PFC-Chatboot;
-- Dentro da pasta do aquivo insira o comando "docker compose up para criar e executar os containers;
+- Dentro da pasta do aquivo insira o comando "docker-compose up" para criar e executar os containers;
 - Utilize o programa dockstation “https://dockstation.io/” para manipular os containers docker;
 
 
