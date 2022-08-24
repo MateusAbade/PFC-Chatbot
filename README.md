@@ -14,12 +14,12 @@
  Criar e executar containers dockers:
 - Navegue até o local do arquivo pela linha de comando do sistema operacional. Exemplo cd c: cd /Área de Trabalho/PFC-Chatboot;
 - Dentro da pasta do aquivo insira o comando "docker compose up para criar e executar os containers;
-- Utilize o programa dockerstation “https://dockstation.io/”para manipular os containers docker;
+- Utilize o programa dockstation “https://dockstation.io/”para manipular os containers docker;
 
 
 # Uso
 
- Após todos os conatiners executados, abra o navegador e digite o ip e a porta para usar a aplicação. Ex: 127.0.0.1:5002
+ Após todos os containers executados, abra o navegador e digite o ip e a porta para usar a aplicação. Ex: 127.0.0.1:5002
 
  Cadastrar conversas:
 - Navegue até o menu lateral e selecione o tipo de conversa que deseja cadastrar;
