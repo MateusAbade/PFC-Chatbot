@@ -121,5 +121,4 @@ dmypy.json
 .pyre/
 
 #dependeencies
-/node_modules
-node_modules
+node_modules/
