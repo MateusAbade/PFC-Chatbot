@@ -12,6 +12,7 @@ body {
     font-family: "AnekLatin";
     src: local(Raleway), url(../fonts/AnekLatin-VariableFont_wdth\,wght.ttf);
 }
+
 a {
     text-decoration: none !important;
 }
@@ -66,22 +67,24 @@ a {
     display: none;
 }
 
-#carregar{
-	display: none;
+#carregar {
+    display: none;
 }
 
 
 /* Classes */
-.pagina{
-	overflow-y: auto;
-	position: fixed;
+.pagina {
+    overflow-y: auto;
+    position: fixed;
     height: 100%;
-	width: 102%;
+    width: 102%;
 }
+
 .lnavbar {
     padding-top: 0px !important;
     padding-bottom: 0px !important;
 }
+
 .bLateral {
     padding: 20px 0px 20px 0px;
 
@@ -114,7 +117,13 @@ a {
     margin-left: 4%;
 }
 
-
+.login {
+    background-image: linear-gradient(#A67FF6, #A67FF6);
+    color: #fff;
+}
+.loginLegenda{
+    color: #484848 !important;
+}
 .send {
     border-radius: 5px 5px 5px 5px !important;
 }
@@ -139,15 +148,15 @@ a {
     text-decoration: underline !important;
 }
 
-.tabela{
+.tabela {
     height: 500px;
     overflow-y: auto;
 }
 
-.tabela2{
-	height: 289px;
-	overflow-y: auto;
-	overflow-x: hidden;
+.tabela2 {
+    height: 289px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .btnBot {
@@ -155,16 +164,17 @@ a {
     border: 1px solid transparent;
 }
 
-.alertaTreinamento{
-	position: absolute !important;
+.alertaTreinamento {
+    position: absolute !important;
     top: 72%;
     left: 29%;
     width: 50%;
 
 }
-.alertaConversas{
-	position: absolute !important;
-	top: 11%;
+
+.alertaConversas {
+    position: absolute !important;
+    top: 11%;
     left: 37%;
     width: 50%;
 }
@@ -195,6 +205,7 @@ a {
     transform: scale(1.2);
 
 }
+
 .btnMenu:focus {
     box-shadow: none !important;
 }
@@ -262,25 +273,25 @@ a {
 }
 
 .menu {
-	background-color: #40aba0 !important;
-	border: 0 !important;	
+    background-color: #40aba0 !important;
+    border: 0 !important;
 }
 
 
 .borda-tabela {
-	border:solid 1px #DFDFDF;
-	padding:25px !important;
+    border: solid 1px #DFDFDF;
+    padding: 25px !important;
 }
 
 .ativo {
-	background-color: #fff !important;
-	border: #fff !important;
-    border-right:solid 10px #006575 !important;
-    
+    background-color: #fff !important;
+    border: #fff !important;
+    border-right: solid 10px #006575 !important;
+
 }
 
 .activoTexto {
-	color: #006575 !important;
+    color: #006575 !important;
     font-family: 'AnekLatin', sans-serif;
     font-size: 20px;
 }
@@ -293,16 +304,20 @@ a {
     font-family: 'AnekLatin', sans-serif;
 
 }
-.btnExcluirTreinamento{
+
+.btnExcluirTreinamento {
     width: 100%;
 }
-@media (max-width: 768px) { 
-    .pagina{
+
+@media (max-width: 768px) {
+    .pagina {
         height: 80%;
     }
-    .btnExcluirTreinamento{
+
+    .btnExcluirTreinamento {
         width: 60px;
     }
+
     .bot {
         margin: 0;
     }

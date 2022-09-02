@@ -1,36 +1,28 @@
-<%- include('cabecalho'); %>
-  <div class="row pagina">
-    <div class="col-md-3 menu g-0">
-      <ul class="list-group">
-        <li class="list-group-item menu pt-3 pb-3 ativo"><a class="d-flex align-items-center activoTexto" href="/">
-          <i class="material-icons pe-2">home</i>HOME</a>
-        </li>
-        
-        <li class="tLateral list-group-item menu pt-3 pb-3 d-flex align-items-center">
-          <i class="material-icons pe-2">computer</i>CADASTROS
-        </li>
-        
-        <li class="list-group-item menu pt-3 pb-3 ps-5">
-          <a class="tLateral d-flex align-items-center" href="/cadastrar-texto">
-            <i class="material-icons pe-2">subject</i>Mensagens de Texto</a>
-        </li>
-        
-        <li class="list-group-item menu pt-3 pb-3 ps-5">
-          <a class="tLateral d-flex align-items-center" href="/cadastrar-media">
-            <i class="material-icons pe-2">perm_media</i> Mensagens de medias</a>
-        </li>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-        <li class="list-group-item menu pt-3 pb-3">
-          <a class="tLateral d-flex align-items-center" href="/conversas-cadastradas">
-            <i class="material-icons pe-2">info</i>INFORMAÇÕES CADASTRADAS</a>
-        </li>
-        
-        <li class="list-group-item menu pt-3 pb-3">
-          <a class="tLateral d-flex align-items-center" href="/treinar-robo"><i
-              class="material-icons pe-2">smart_toy</i>TREINAR ROBÔ</a>
-        </li>
-      </ul>
-    </div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatBot de suporte</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/bootstrap-5.1.3/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/estilo.css">
+</head>
+
+<body>
+  <nav class="navbar nav-color  lnavbar sticky-md-top">
+    <div class="container-fluid">
+      <div class="col-2 d-flex justify-content-start"></div>
+      <div class="col-8 d-flex justify-content-center ">
+        <a class="navbarubrand tPrincipal logo" href="/">ChatBot de Suporte</a>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <a href="/login"><i class="material-icons icone btnHover">login</i></a>
+      </div>
+  </nav>
+  <div class="row pagina">
 
     <div class="col-md-9">
       <div class="container">
@@ -44,15 +36,14 @@
             <div class="row mb-3">
               <div class="row">
                 <div class="mt-5 col">
-                  <h2 class="titulo2 text-center">Bem-vindo ao ambiente de desenvolvimento do seu ChatBot</h2>
+                  <h2 class="titulo2 text-center">Bem-vindo ao ambiente de suporte</h2>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <p class="texto text-center">Tudo é muito simples e facil, para começar, cadastre as perguntas
-                    e respostas selecionando a opção de cadastro no menu lateral. Após 
-                    realizar o cadastro, faça o treinamento do robô acessando a página de "Treinamento", feito isso seu 
-                    robô estará pronto para conversar. 😊
+                  <p class="texto text-center">
+                    Para inciar um atendimento basta clicar em "Chamar robô" e em seguida inserir uma pergunta. 
+                    Nosso assistente está preparado para te auxiliar nessa jornada respondendo a suas dúvidas. Aproveite! 🙃
                   </p>
                 </div>
               </div>

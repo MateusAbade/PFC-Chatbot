@@ -41,33 +41,84 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 //Rotas das páginas 
+
 router.get('/', (req, res) => {
     res.render('index.ejs');
 });
-router.get('/chatbot', (req, res) => {
-    res.render('chatbot.ejs');
+
+router.get('/login', (req, res) => {
+    if(req.session.usuario){
+        res.render('index.ejs');
+    }else{
+        res.render('login.ejs'); 
+    }
+});
+
+router.get('/painel', (req, res) => {
+    if(req.session.usuario){
+        res.render('painel.ejs');
+    }else{
+        res.redirect('/'); 
+    }
 });
 router.get('/cadastrar-texto', (req, res) => {
-    res.render('cadTexto.ejs');
+    if(req.session.usuario){
+        res.render('cadTexto.ejs');
+    }else{
+        res.redirect('/'); 
+    }
 });
 router.get('/cadastrar-media', (req, res) => {
-    res.render('cadMedia.ejs');
+    if(req.session.usuario){
+        res.render('cadMedia.ejs');
+    }else{
+        res.redirect('/'); 
+    }
 });
 router.get('/conversas-cadastradas', (req, res) => {
-    conversas.getConversas().then(conversasCadastradas => {
-        res.render('conversasCadastradas.ejs', { dados: conversasCadastradas, alertaDelete: '' });
-    });
+    if(req.session.usuario){
+        conversas.getConversas().then(conversasCadastradas => {
+            res.render('conversasCadastradas.ejs', { dados: conversasCadastradas, alertaDelete: '' });
+        });
+    }else{
+        res.redirect('/'); 
+    }
 });
 
 router.get('/medias-cadastradas', (req, res) => {
-    conversas.getMedias().then(mediasCadastradas => {
-        res.render('mediasCadastradas.ejs', { dados: mediasCadastradas, alertaDelete: '' });
-    });
+    if(req.session.usuario){
+        conversas.getMedias().then(mediasCadastradas => {
+            res.render('mediasCadastradas.ejs', { dados: mediasCadastradas, alertaDelete: '' });
+        });
+    }else{
+        res.redirect('/'); 
+    }
 });
 router.get('/treinar-robo', (req, res) => {
-    res.render('treinamento.ejs');
+    if(req.session.usuario){
+        res.render('treinamento.ejs');
+    }else{
+        res.redirect('/'); 
+    }
 });
 
+let usuario = 'mateus';
+let senha = '1234';
+router.post('/login', (req, res) => {
+    if(req.body.usuario == usuario && req.body.senha == senha){
+        req.session.usuario = usuario
+        res.redirect('/painel');
+    }else{
+        req.flash('mensagemErro', 'Usuário/senha incorreto!');
+        res.redirect('/login');
+    }
+
+});
+
+router.get('/logout', (req, res) => {
+    req.session.destroy(); 
+    res.render('login.ejs');
+});
 
 //Rotas de cadastros das perguntas e respostas no banco
 router.post('/cadastrar-texto', (req, res) => {

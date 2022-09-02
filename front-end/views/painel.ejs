@@ -1,0 +1,76 @@
+<%- include('cabecalho'); %>
+  <div class="row pagina">
+    <div class="col-md-3 menu g-0">
+      <ul class="list-group">
+        <li class="list-group-item menu pt-3 pb-3 ativo"><a class="d-flex align-items-center activoTexto" href="/painel">
+          <i class="material-icons pe-2">home</i>HOME</a>
+        </li>
+        
+        <li class="tLateral list-group-item menu pt-3 pb-3 d-flex align-items-center">
+          <i class="material-icons pe-2">computer</i>CADASTROS
+        </li>
+        
+        <li class="list-group-item menu pt-3 pb-3 ps-5">
+          <a class="tLateral d-flex align-items-center" href="/cadastrar-texto">
+            <i class="material-icons pe-2">subject</i>Mensagens de Texto</a>
+        </li>
+        
+        <li class="list-group-item menu pt-3 pb-3 ps-5">
+          <a class="tLateral d-flex align-items-center" href="/cadastrar-media">
+            <i class="material-icons pe-2">perm_media</i> Mensagens de medias</a>
+        </li>
+
+        <li class="list-group-item menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center" href="/conversas-cadastradas">
+            <i class="material-icons pe-2">info</i>INFORMAÇÕES CADASTRADAS</a>
+        </li>
+        
+        <li class="list-group-item menu pt-3 pb-3">
+          <a class="tLateral d-flex align-items-center" href="/treinar-robo"><i
+              class="material-icons pe-2">smart_toy</i>TREINAR ROBÔ</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-9">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="row mb-3 d-flex align-items-center">
+              <img class="w-100" src="./img//Wavy_Tech-12_Single-041.jpg" alt="">
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="row mb-3">
+              <div class="row">
+                <div class="mt-5 col">
+                  <h2 class="titulo2 text-center">Bem-vindo ao ambiente de desenvolvimento do seu ChatBot</h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p class="texto text-center">Tudo é muito simples e facil, para começar, cadastre as perguntas
+                    e respostas selecionando a opção de cadastro no menu lateral. Após 
+                    realizar o cadastro, faça o treinamento do robô acessando a página de "Treinamento", feito isso seu 
+                    robô estará pronto para conversar. 😊
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3 d-flex align-items-center">
+          <%- include('chat'); %>
+        </div>
+      </div>
+      <div id="janelaModal">
+        <div>
+          <button type="button" id="btnFechar" data-bs-dismiss="offcanvas" aria-label="Close"><i
+              class="material-icons icone">close</i></button>
+        </div>
+        <img id="imgModal">
+      </div>
+    </div>
+  </div>
+
+<%- include('rodape'); %>
